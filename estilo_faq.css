@@ -153,7 +153,7 @@ footer p {
     font-size: 0.9em;
 }
 .reseñas-bg {
-    background-image: url('reseñas_fondo.jpg'); /* usa el nombre correcto del archivo */
+    background-image: url('assets/img/background/reseñas_fondo.jpg'); /* usa el nombre correcto del archivo */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -174,7 +174,7 @@ footer p {
 }
 
 .hero-bg {
-    background-image: url('hero_fondo.jpg'); /* Asegúrate que este nombre coincide con tu archivo */
+    background-image: url('assets/img/background/hero_fondo.jpg'); /* Asegúrate que este nombre coincide con tu archivo */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -272,7 +272,7 @@ nav ul li a:hover {
     text-align: right;
 }
 .hero-bg {
-    background-image: url('imagen_hero_fondo.jpg'); /* Asegúrate de que el nombre y ruta sean correctos */
+    background-image: url('assets/img/background/imagen_hero_fondo.jpg'); /* Asegúrate de que el nombre y ruta sean correctos */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

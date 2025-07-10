@@ -153,7 +153,7 @@ footer p {
     font-size: 0.9em;
 }
 .reseñas-bg {
-    background-image: url('imagen_reseñas_fondo.jpg'); /* usa el nombre correcto del archivo */
+    background-image: url('assets/img/background/imagen_reseñas_fondo.jpg'); /* usa el nombre correcto del archivo */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -174,7 +174,7 @@ footer p {
 }
 
 .hero-bg {
-    background-image: url('imagen_hero_fondo.jpg'); /* Asegúrate que este nombre coincide con tu archivo */
+    background-image: url('assets/img/background/imagen_hero_fondo.jpg'); /* Asegúrate que este nombre coincide con tu archivo */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -508,7 +508,7 @@ header {
     }
 }
 #join-intro {
-    background-image: url('fondo_unete.jpg'); /* o imagen corporativa */
+    background-image: url('assets/img/background/fondo_unete.jpg'); /* o imagen corporativa */
     background-size: cover;
     background-position: center;
     padding: 80px 20px;
@@ -593,7 +593,7 @@ header {
   transform: scale(1.05);
 }
 .fondo-unete {
-  background-image: url('imagen_hero_fondo.jpg');
+  background-image: url('assets/img/background/imagen_hero_fondo.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
