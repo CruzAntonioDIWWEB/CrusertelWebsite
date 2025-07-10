@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crusertel - Contáctanos</title>
-    <link rel="stylesheet" href="estilo_contacto.css">
+    <link rel="stylesheet" href="assets/css/estilo_contacto.css">
 </head>
 <body>
     <header>
     <div class="container header-content">
         <div class="logo">
-            <img src="imagen_logo_crusertel.jpg" alt="Logo Crusertel">
+            <img src="assets/img/logo/imagen_logo_crusertel.jpg" alt="Logo Crusertel">
         </div>
         <nav>
             <ul>
@@ -84,6 +84,6 @@
     </div>
 </footer>
 
-    <script src="funciones_contacto.js"></script>
+    <script src="assets/js/funciones_contacto.js"></script>
 </body>
 </html>
