@@ -84,6 +84,6 @@
     </div>
 </footer>
 
-    <script src="funciones_contacto.js"></script>
+    <script src="assets/js/funciones_contacto.js"></script>
 </body>
 </html>
