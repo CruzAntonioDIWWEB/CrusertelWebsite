@@ -9,12 +9,12 @@
     <div class="container">
         <div class="grid-ventajas">
             <div class="ventaja">
-                <img src="assets/img/people/imagen_persona1.png" alt="Comisiones atractivas">
+                <img src="/dashboard/Crusertel/assets/img/people/imagen_persona1.png" alt="Comisiones atractivas">
                 <h3>Comisiones atractivas</h3>
                 <p><b>En esta empresa contamos con un marco retributivo llamativo que no podrás dejar escapar.</b></p>
             </div>
             <div class="ventaja">
-                <img src="assets/img/people/imagen_persona2.png" alt="Comodidad y disponibilidad">
+                <img src="/dashboard/Crusertel/assets/img/people/imagen_persona2.png" alt="Comodidad y disponibilidad">
                 <h3>Comodidad y disponibilidad</h3>
                 <p><b>Te garantizamos entorno de trabajo cómodo con disponibilidad de cualquier material necesario para nuestros colaboradores.</b></p>
             </div>

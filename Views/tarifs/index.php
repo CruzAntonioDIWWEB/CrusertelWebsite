@@ -4,22 +4,22 @@
     <h2 class="subtitulo">Tarifas Vodafone</h2>
     <div class="contenedor-tarifas">
         <div class="tarifa">
-            <img src="assets/img/tarifas/imagen_tarifa2.png" alt="Vodafone Tarifa 2">
+            <img src="/dashboard/Crusertel/assets/img/tarifas/imagen_tarifa2.png" alt="Vodafone Tarifa 2">
         </div>
         <div class="tarifa">
-            <img src="assets/img/tarifas/imagen_tarifa3.png" alt="Vodafone Tarifa 3">
+            <img src="/dashboard/Crusertel/assets/img/tarifas/imagen_tarifa3.png" alt="Vodafone Tarifa 3">
         </div>
         <div class="tarifa">
-            <img src="assets/img/tarifas/imagen_tarifa4.png" alt="Vodafone Tarifa 4">
+            <img src="/dashboard/Crusertel/assets/img/tarifas/imagen_tarifa4.png" alt="Vodafone Tarifa 4">
         </div>
         <div class="tarifa">
-            <img src="assets/img/tarifas/imagen_tarifa5.png" alt="Vodafone Tarifa 5">
+            <img src="/dashboard/Crusertel/assets/img/tarifas/imagen_tarifa5.png" alt="Vodafone Tarifa 5">
         </div>
         <div class="tarifa">
-            <img src="assets/img/tarifas/imagen_tarifa6.png" alt="Vodafone Tarifa 6">
+            <img src="/dashboard/Crusertel/assets/img/tarifas/imagen_tarifa6.png" alt="Vodafone Tarifa 6">
         </div>
         <div class="tarifa">
-            <img src="assets/img/tarifas/imagen_tarifa7.png" alt="Vodafone Tarifa 7">
+            <img src="/dashboard/Crusertel/assets/img/tarifas/imagen_tarifa7.png" alt="Vodafone Tarifa 7">
         </div>
     </div>
 </section>
@@ -28,10 +28,10 @@
     <h2 class="subtitulo">Tarifas Lowi</h2>
     <div class="contenedor-tarifas">
         <div class="tarifa">
-            <img src="assets/img/tarifas/imagen_tarifa8.png" alt="Lowi Tarifa 1">
+            <img src="/dashboard/Crusertel/assets/img/tarifas/imagen_tarifa8.png" alt="Lowi Tarifa 1">
         </div>
         <div class="tarifa">
-            <img src="assets/img/tarifas/imagen_tarifa1.png" alt="Lowi Tarifa 2">
+            <img src="/dashboard/Crusertel/assets/img/tarifas/imagen_tarifa1.png" alt="Lowi Tarifa 2">
         </div>
     </div>
 </section>

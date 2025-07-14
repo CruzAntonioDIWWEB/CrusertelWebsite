@@ -1,6 +1,6 @@
 <section id="hero" class="fade-in-up-initial hero-bg">
     <div class="container">
-        <img src="assets/img/logo/imagen_logo_crusertel_transparente.png" alt="Logo Crusertel" class="hero-logo">
+        <img src="/dashboard/Crusertel/assets/img/logo/imagen_logo_crusertel_transparente.png" alt="Logo Crusertel" class="hero-logo">
         <p><b>Conectamos tu mundo con la mejor señal</b></p>
         <a href="#about" class="btn">Más información</a>
     </div>
@@ -18,7 +18,7 @@
                 <p><b>Desde nuestras soluciones de fibra y móvil, nos enorgullece conectar a individuos, empresas y comunidades. Nuestra misión es proporcionar servicios de telecomunicaciones que no solo cumplan con los estándares más altos de calidad, sino que también sean accesibles y adaptados a las necesidades específicas de cada cliente.</b></p>
             </div>
             <div class="about-image-content">
-                <img src="assets/img/people/imagen_equipo_crusertel.jpg" alt="Equipo Crusertel" class="team-image">
+                <img src="/dashboard/Crusertel/assets/img/people/imagen_equipo_crusertel.jpg" alt="Equipo Crusertel" class="team-image">
             </div>
         </div>
     </div>

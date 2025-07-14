@@ -1,7 +1,7 @@
 <header class="fade-in-down-initial">
     <div class="container header-content">
         <div class="logo">
-            <img src="../../assets/img/logo/imagen_logo_crusertel.jpg" alt="Logo Crusertel">
+            <img src="/dashboard/Crusertel/assets/img/logo/imagen_logo_crusertel.jpg" alt="Logo Crusertel">
         </div>
         <nav>
             <ul>
