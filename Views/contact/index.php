@@ -1,13 +1,7 @@
-<section id="contact-intro">
-    <div class="container">
-        <h2>Contáctanos</h2>
-        <p><b>¿Tienes alguna pregunta, sugerencia o necesitas asistencia? Estamos aquí para ayudarte. Nuestro equipo de expertos está disponible para ofrecerte el mejor asesoramiento personalizado.</b></p>
-    </div>
-</section>
-
 <section id="contact-form">
     <div class="container">
-        <form action="guardar_contacto.php" method="POST" class="contact-form">
+        <!-- Remove action attribute, let MVC handle it -->
+        <form method="POST" class="contact-form">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>
@@ -35,23 +29,14 @@
             
             <button type="submit" class="btn btn-submit">Enviar Mensaje</button>
         </form>
-    </div>
-</section>
-
-<section id="contact-info">
-    <div class="container">
-        <div class="contact-info-grid">
-            <div class="contact-item">
-                <h3>📍 Ubicación</h3>
-                <p>Calle Arabial 45 local 18<br>Granada, España</p>
+        
+        <!-- Success/Error messages -->
+        <div id="form-messages" style="display: none;">
+            <div class="alert alert-success" id="success-message">
+                Mensaje enviado correctamente. Te contactaremos pronto.
             </div>
-            <div class="contact-item">
-                <h3>📞 Teléfono</h3>
-                <p>958 01 64 11</p>
-            </div>
-            <div class="contact-item">
-                <h3>📩 Email</h3>
-                <p>info@crusertel.es</p>
+            <div class="alert alert-error" id="error-message">
+                Error al enviar el mensaje. Por favor, inténtalo de nuevo.
             </div>
         </div>
     </div>

@@ -7,7 +7,7 @@ class BaseController
     /**
      * Load a view with data and layout
      */
-    protected function loadView($view, $data = []) 
+    public function loadView($view, $data = []) 
     {
         // Extract data to make variables available in view
         extract($data);
@@ -16,7 +16,7 @@ class BaseController
         ob_start();
         
         // Include the view file
-        $viewFile = "views/{$view}.php";
+        $viewFile = __DIR__ . "/../Views/{$view}.php";
         if (file_exists($viewFile)) {
             include $viewFile;
         } else {
@@ -27,7 +27,7 @@ class BaseController
         $content = ob_get_clean();
         
         // Load main layout with content
-        include "views/layouts/main.php";
+        include __DIR__ . "/../Views/layouts/main.php";
     }
     
     /**

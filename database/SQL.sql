@@ -2,9 +2,9 @@
 -- version 4.9.11
 -- https://www.phpmyadmin.net/
 --
--- Servidor: db5014454412.hosting-data.io
--- Tiempo de generación: 08-09-2025 a las 08:43:14
--- Versión del servidor: 10.6.15-MariaDB-1:10.6.15+maria~deb11-log
+-- Servidor: db5018579352.hosting-data.io
+-- Tiempo de generación: 08-09-2025 a las 09:23:55
+-- Versión del servidor: 8.0.36
 -- Versión de PHP: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -19,832 +19,125 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `dbs12019645`
+-- Base de datos: `dbs14739637`
 --
-CREATE DATABASE IF NOT EXISTS `dbs12019645` DEFAULT CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci;
-USE `dbs12019645`;
+CREATE DATABASE IF NOT EXISTS `dbs14739637` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `dbs14739637`;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `serpym_commentmeta`
+-- Estructura de tabla para la tabla `contact_submissions`
 --
 
-CREATE TABLE `serpym_commentmeta` (
-  `meta_id` bigint(20) UNSIGNED NOT NULL,
-  `comment_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `meta_key` varchar(255) DEFAULT NULL,
-  `meta_value` longtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+CREATE TABLE `contact_submissions` (
+  `id` int UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `subject` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
+  `status` enum('new','read','responded','archived') COLLATE utf8mb4_unicode_ci DEFAULT 'new',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `serpym_comments`
+-- Estructura de tabla para la tabla `job_applications`
 --
 
-CREATE TABLE `serpym_comments` (
-  `comment_ID` bigint(20) UNSIGNED NOT NULL,
-  `comment_post_ID` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `comment_author` tinytext NOT NULL,
-  `comment_author_email` varchar(100) NOT NULL DEFAULT '',
-  `comment_author_url` varchar(200) NOT NULL DEFAULT '',
-  `comment_author_IP` varchar(100) NOT NULL DEFAULT '',
-  `comment_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `comment_date_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `comment_content` text NOT NULL,
-  `comment_karma` int(11) NOT NULL DEFAULT 0,
-  `comment_approved` varchar(20) NOT NULL DEFAULT '1',
-  `comment_agent` varchar(255) NOT NULL DEFAULT '',
-  `comment_type` varchar(20) NOT NULL DEFAULT 'comment',
-  `comment_parent` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `user_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
+CREATE TABLE `job_applications` (
+  `id` int UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `position_interested` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cv_filename` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cover_letter` text COLLATE utf8mb4_unicode_ci,
+  `status` enum('pending','reviewing','interviewed','hired','rejected') COLLATE utf8mb4_unicode_ci DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `serpym_e_events`
+-- Estructura de tabla para la tabla `settings`
 --
 
-CREATE TABLE `serpym_e_events` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `event_data` text DEFAULT NULL,
-  `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_e_notes`
---
-
-CREATE TABLE `serpym_e_notes` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `route_url` text DEFAULT NULL COMMENT 'Clean url where the note was created.',
-  `route_title` varchar(255) DEFAULT NULL,
-  `route_post_id` bigint(20) UNSIGNED DEFAULT NULL COMMENT 'The post id of the route that the note was created on.',
-  `post_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `element_id` varchar(60) DEFAULT NULL COMMENT 'The Elementor element ID the note is attached to.',
-  `parent_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `author_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `author_display_name` varchar(250) DEFAULT NULL COMMENT 'Save the author name when the author was deleted.',
-  `status` varchar(20) NOT NULL DEFAULT 'publish',
-  `position` text DEFAULT NULL COMMENT 'A JSON string that represents the position of the note inside the element in percentages. e.g. {x:10, y:15}',
-  `content` longtext DEFAULT NULL,
-  `is_resolved` tinyint(1) NOT NULL DEFAULT 0,
-  `is_public` tinyint(1) NOT NULL DEFAULT 1,
-  `last_activity_at` datetime DEFAULT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
+CREATE TABLE `settings` (
+  `id` int UNSIGNED NOT NULL,
+  `setting_key` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `setting_value` text COLLATE utf8mb4_unicode_ci,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Estructura de tabla para la tabla `serpym_e_notes_users_relations`
+-- Volcado de datos para la tabla `settings`
 --
 
-CREATE TABLE `serpym_e_notes_users_relations` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `type` varchar(60) NOT NULL COMMENT 'The relation type between user and note (e.g mention, watch, read).',
-  `note_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_e_submissions`
---
-
-CREATE TABLE `serpym_e_submissions` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `type` varchar(60) DEFAULT NULL,
-  `hash_id` varchar(60) NOT NULL,
-  `main_meta_id` bigint(20) UNSIGNED NOT NULL COMMENT 'Id of main field. to represent the main meta field',
-  `post_id` bigint(20) UNSIGNED NOT NULL,
-  `referer` varchar(500) NOT NULL,
-  `referer_title` varchar(300) DEFAULT NULL,
-  `element_id` varchar(20) NOT NULL,
-  `form_name` varchar(60) NOT NULL,
-  `campaign_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `user_ip` varchar(46) NOT NULL,
-  `user_agent` text NOT NULL,
-  `actions_count` int(11) DEFAULT 0,
-  `actions_succeeded_count` int(11) DEFAULT 0,
-  `status` varchar(20) NOT NULL,
-  `is_read` tinyint(1) NOT NULL DEFAULT 0,
-  `meta` text DEFAULT NULL,
-  `created_at_gmt` datetime NOT NULL,
-  `updated_at_gmt` datetime NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_e_submissions_actions_log`
---
-
-CREATE TABLE `serpym_e_submissions_actions_log` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `submission_id` bigint(20) UNSIGNED NOT NULL,
-  `action_name` varchar(60) NOT NULL,
-  `action_label` varchar(60) DEFAULT NULL,
-  `status` varchar(20) NOT NULL,
-  `log` text DEFAULT NULL,
-  `created_at_gmt` datetime NOT NULL,
-  `updated_at_gmt` datetime NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_e_submissions_values`
---
-
-CREATE TABLE `serpym_e_submissions_values` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `submission_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `key` varchar(60) DEFAULT NULL,
-  `value` longtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_gdpr_cc_options`
---
-
-CREATE TABLE `serpym_gdpr_cc_options` (
-  `id` int(11) NOT NULL,
-  `option_key` varchar(255) NOT NULL DEFAULT '1',
-  `option_value` longtext DEFAULT NULL,
-  `site_id` int(11) DEFAULT NULL,
-  `extras` longtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_links`
---
-
-CREATE TABLE `serpym_links` (
-  `link_id` bigint(20) UNSIGNED NOT NULL,
-  `link_url` varchar(255) NOT NULL DEFAULT '',
-  `link_name` varchar(255) NOT NULL DEFAULT '',
-  `link_image` varchar(255) NOT NULL DEFAULT '',
-  `link_target` varchar(25) NOT NULL DEFAULT '',
-  `link_description` varchar(255) NOT NULL DEFAULT '',
-  `link_visible` varchar(20) NOT NULL DEFAULT 'Y',
-  `link_owner` bigint(20) UNSIGNED NOT NULL DEFAULT 1,
-  `link_rating` int(11) NOT NULL DEFAULT 0,
-  `link_updated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `link_rel` varchar(255) NOT NULL DEFAULT '',
-  `link_notes` mediumtext NOT NULL,
-  `link_rss` varchar(255) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_options`
---
-
-CREATE TABLE `serpym_options` (
-  `option_id` bigint(20) UNSIGNED NOT NULL,
-  `option_name` varchar(191) NOT NULL DEFAULT '',
-  `option_value` longtext NOT NULL,
-  `autoload` varchar(20) NOT NULL DEFAULT 'yes'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_postmeta`
---
-
-CREATE TABLE `serpym_postmeta` (
-  `meta_id` bigint(20) UNSIGNED NOT NULL,
-  `post_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `meta_key` varchar(255) DEFAULT NULL,
-  `meta_value` longtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_posts`
---
-
-CREATE TABLE `serpym_posts` (
-  `ID` bigint(20) UNSIGNED NOT NULL,
-  `post_author` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `post_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `post_date_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `post_content` longtext NOT NULL,
-  `post_title` text NOT NULL,
-  `post_excerpt` text NOT NULL,
-  `post_status` varchar(20) NOT NULL DEFAULT 'publish',
-  `comment_status` varchar(20) NOT NULL DEFAULT 'open',
-  `ping_status` varchar(20) NOT NULL DEFAULT 'open',
-  `post_password` varchar(255) NOT NULL DEFAULT '',
-  `post_name` varchar(200) NOT NULL DEFAULT '',
-  `to_ping` text NOT NULL,
-  `pinged` text NOT NULL,
-  `post_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `post_modified_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `post_content_filtered` longtext NOT NULL,
-  `post_parent` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `guid` varchar(255) NOT NULL DEFAULT '',
-  `menu_order` int(11) NOT NULL DEFAULT 0,
-  `post_type` varchar(20) NOT NULL DEFAULT 'post',
-  `post_mime_type` varchar(100) NOT NULL DEFAULT '',
-  `comment_count` bigint(20) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_termmeta`
---
-
-CREATE TABLE `serpym_termmeta` (
-  `meta_id` bigint(20) UNSIGNED NOT NULL,
-  `term_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `meta_key` varchar(255) DEFAULT NULL,
-  `meta_value` longtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_terms`
---
-
-CREATE TABLE `serpym_terms` (
-  `term_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(200) NOT NULL DEFAULT '',
-  `slug` varchar(200) NOT NULL DEFAULT '',
-  `term_group` bigint(10) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_term_relationships`
---
-
-CREATE TABLE `serpym_term_relationships` (
-  `object_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `term_taxonomy_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `term_order` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_term_taxonomy`
---
-
-CREATE TABLE `serpym_term_taxonomy` (
-  `term_taxonomy_id` bigint(20) UNSIGNED NOT NULL,
-  `term_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `taxonomy` varchar(32) NOT NULL DEFAULT '',
-  `description` longtext NOT NULL,
-  `parent` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `count` bigint(20) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_usermeta`
---
-
-CREATE TABLE `serpym_usermeta` (
-  `umeta_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
-  `meta_key` varchar(255) DEFAULT NULL,
-  `meta_value` longtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_users`
---
-
-CREATE TABLE `serpym_users` (
-  `ID` bigint(20) UNSIGNED NOT NULL,
-  `user_login` varchar(60) NOT NULL DEFAULT '',
-  `user_pass` varchar(255) NOT NULL DEFAULT '',
-  `user_nicename` varchar(50) NOT NULL DEFAULT '',
-  `user_email` varchar(100) NOT NULL DEFAULT '',
-  `user_url` varchar(100) NOT NULL DEFAULT '',
-  `user_registered` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `user_activation_key` varchar(255) NOT NULL DEFAULT '',
-  `user_status` int(11) NOT NULL DEFAULT 0,
-  `display_name` varchar(250) NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_yoast_indexable`
---
-
-CREATE TABLE `serpym_yoast_indexable` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `permalink` longtext DEFAULT NULL,
-  `permalink_hash` varchar(40) DEFAULT NULL,
-  `object_id` bigint(20) DEFAULT NULL,
-  `object_type` varchar(32) NOT NULL,
-  `object_sub_type` varchar(32) DEFAULT NULL,
-  `author_id` bigint(20) DEFAULT NULL,
-  `post_parent` bigint(20) DEFAULT NULL,
-  `title` text DEFAULT NULL,
-  `description` mediumtext DEFAULT NULL,
-  `breadcrumb_title` text DEFAULT NULL,
-  `post_status` varchar(20) DEFAULT NULL,
-  `is_public` tinyint(1) DEFAULT NULL,
-  `is_protected` tinyint(1) DEFAULT 0,
-  `has_public_posts` tinyint(1) DEFAULT NULL,
-  `number_of_pages` int(11) UNSIGNED DEFAULT NULL,
-  `canonical` longtext DEFAULT NULL,
-  `primary_focus_keyword` varchar(191) DEFAULT NULL,
-  `primary_focus_keyword_score` int(3) DEFAULT NULL,
-  `readability_score` int(3) DEFAULT NULL,
-  `is_cornerstone` tinyint(1) DEFAULT 0,
-  `is_robots_noindex` tinyint(1) DEFAULT 0,
-  `is_robots_nofollow` tinyint(1) DEFAULT 0,
-  `is_robots_noarchive` tinyint(1) DEFAULT 0,
-  `is_robots_noimageindex` tinyint(1) DEFAULT 0,
-  `is_robots_nosnippet` tinyint(1) DEFAULT 0,
-  `twitter_title` text DEFAULT NULL,
-  `twitter_image` longtext DEFAULT NULL,
-  `twitter_description` longtext DEFAULT NULL,
-  `twitter_image_id` varchar(191) DEFAULT NULL,
-  `twitter_image_source` text DEFAULT NULL,
-  `open_graph_title` text DEFAULT NULL,
-  `open_graph_description` longtext DEFAULT NULL,
-  `open_graph_image` longtext DEFAULT NULL,
-  `open_graph_image_id` varchar(191) DEFAULT NULL,
-  `open_graph_image_source` text DEFAULT NULL,
-  `open_graph_image_meta` mediumtext DEFAULT NULL,
-  `link_count` int(11) DEFAULT NULL,
-  `incoming_link_count` int(11) DEFAULT NULL,
-  `prominent_words_version` int(11) UNSIGNED DEFAULT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `blog_id` bigint(20) NOT NULL DEFAULT 1,
-  `language` varchar(32) DEFAULT NULL,
-  `region` varchar(32) DEFAULT NULL,
-  `schema_page_type` varchar(64) DEFAULT NULL,
-  `schema_article_type` varchar(64) DEFAULT NULL,
-  `has_ancestors` tinyint(1) DEFAULT 0,
-  `estimated_reading_time_minutes` int(11) DEFAULT NULL,
-  `version` int(11) DEFAULT 1,
-  `object_last_modified` datetime DEFAULT NULL,
-  `object_published_at` datetime DEFAULT NULL,
-  `inclusive_language_score` int(3) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_yoast_indexable_hierarchy`
---
-
-CREATE TABLE `serpym_yoast_indexable_hierarchy` (
-  `indexable_id` int(11) UNSIGNED NOT NULL,
-  `ancestor_id` int(11) UNSIGNED NOT NULL,
-  `depth` int(11) UNSIGNED DEFAULT NULL,
-  `blog_id` bigint(20) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_yoast_migrations`
---
-
-CREATE TABLE `serpym_yoast_migrations` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `version` varchar(191) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_yoast_primary_term`
---
-
-CREATE TABLE `serpym_yoast_primary_term` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `post_id` bigint(20) DEFAULT NULL,
-  `term_id` bigint(20) DEFAULT NULL,
-  `taxonomy` varchar(32) NOT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `blog_id` bigint(20) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `serpym_yoast_seo_links`
---
-
-CREATE TABLE `serpym_yoast_seo_links` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `url` varchar(255) DEFAULT NULL,
-  `post_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `target_post_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `type` varchar(8) DEFAULT NULL,
-  `indexable_id` int(11) UNSIGNED DEFAULT NULL,
-  `target_indexable_id` int(11) UNSIGNED DEFAULT NULL,
-  `height` int(11) UNSIGNED DEFAULT NULL,
-  `width` int(11) UNSIGNED DEFAULT NULL,
-  `size` int(11) UNSIGNED DEFAULT NULL,
-  `language` varchar(32) DEFAULT NULL,
-  `region` varchar(32) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+INSERT INTO `settings` (`id`, `setting_key`, `setting_value`, `description`, `created_at`) VALUES
+(1, 'site_name', 'Crusertel', 'Website name', '2025-09-08 09:23:27'),
+(2, 'contact_email', 'info@crusertel.es', 'Main contact email', '2025-09-08 09:23:27'),
+(3, 'phone', '958 01 64 11', 'Main phone number', '2025-09-08 09:23:27'),
+(4, 'address', 'Calle Arabial 45 local 18, Granada, España', 'Physical address', '2025-09-08 09:23:27'),
+(5, 'maintenance_mode', '0', 'Maintenance mode (0=off, 1=on)', '2025-09-08 09:23:27');
 
 --
 -- Índices para tablas volcadas
 --
 
 --
--- Indices de la tabla `serpym_commentmeta`
+-- Indices de la tabla `contact_submissions`
 --
-ALTER TABLE `serpym_commentmeta`
-  ADD PRIMARY KEY (`meta_id`),
-  ADD KEY `comment_id` (`comment_id`),
-  ADD KEY `meta_key` (`meta_key`(191));
-
---
--- Indices de la tabla `serpym_comments`
---
-ALTER TABLE `serpym_comments`
-  ADD PRIMARY KEY (`comment_ID`),
-  ADD KEY `comment_post_ID` (`comment_post_ID`),
-  ADD KEY `comment_approved_date_gmt` (`comment_approved`,`comment_date_gmt`),
-  ADD KEY `comment_date_gmt` (`comment_date_gmt`),
-  ADD KEY `comment_parent` (`comment_parent`),
-  ADD KEY `comment_author_email` (`comment_author_email`(10));
-
---
--- Indices de la tabla `serpym_e_events`
---
-ALTER TABLE `serpym_e_events`
+ALTER TABLE `contact_submissions`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `created_at_index` (`created_at`);
+  ADD KEY `status` (`status`),
+  ADD KEY `created_at` (`created_at`),
+  ADD KEY `email` (`email`);
 
 --
--- Indices de la tabla `serpym_e_notes`
+-- Indices de la tabla `job_applications`
 --
-ALTER TABLE `serpym_e_notes`
+ALTER TABLE `job_applications`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `route_url_index` (`route_url`(191)),
-  ADD KEY `post_id_index` (`post_id`),
-  ADD KEY `element_id_index` (`element_id`),
-  ADD KEY `parent_id_index` (`parent_id`),
-  ADD KEY `author_id_index` (`author_id`),
-  ADD KEY `status_index` (`status`),
-  ADD KEY `is_resolved_index` (`is_resolved`),
-  ADD KEY `is_public_index` (`is_public`),
-  ADD KEY `created_at_index` (`created_at`),
-  ADD KEY `updated_at_index` (`updated_at`),
-  ADD KEY `last_activity_at_index` (`last_activity_at`);
+  ADD KEY `status` (`status`),
+  ADD KEY `created_at` (`created_at`);
 
 --
--- Indices de la tabla `serpym_e_notes_users_relations`
+-- Indices de la tabla `settings`
 --
-ALTER TABLE `serpym_e_notes_users_relations`
+ALTER TABLE `settings`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `type_index` (`type`),
-  ADD KEY `note_id_index` (`note_id`),
-  ADD KEY `user_id_index` (`user_id`);
-
---
--- Indices de la tabla `serpym_e_submissions`
---
-ALTER TABLE `serpym_e_submissions`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `hash_id_unique_index` (`hash_id`),
-  ADD KEY `main_meta_id_index` (`main_meta_id`),
-  ADD KEY `hash_id_index` (`hash_id`),
-  ADD KEY `type_index` (`type`),
-  ADD KEY `post_id_index` (`post_id`),
-  ADD KEY `element_id_index` (`element_id`),
-  ADD KEY `campaign_id_index` (`campaign_id`),
-  ADD KEY `user_id_index` (`user_id`),
-  ADD KEY `user_ip_index` (`user_ip`),
-  ADD KEY `status_index` (`status`),
-  ADD KEY `is_read_index` (`is_read`),
-  ADD KEY `created_at_gmt_index` (`created_at_gmt`),
-  ADD KEY `updated_at_gmt_index` (`updated_at_gmt`),
-  ADD KEY `created_at_index` (`created_at`),
-  ADD KEY `updated_at_index` (`updated_at`),
-  ADD KEY `referer_index` (`referer`(191)),
-  ADD KEY `referer_title_index` (`referer_title`(191));
-
---
--- Indices de la tabla `serpym_e_submissions_actions_log`
---
-ALTER TABLE `serpym_e_submissions_actions_log`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `submission_id_index` (`submission_id`),
-  ADD KEY `action_name_index` (`action_name`),
-  ADD KEY `status_index` (`status`),
-  ADD KEY `created_at_gmt_index` (`created_at_gmt`),
-  ADD KEY `updated_at_gmt_index` (`updated_at_gmt`),
-  ADD KEY `created_at_index` (`created_at`),
-  ADD KEY `updated_at_index` (`updated_at`);
-
---
--- Indices de la tabla `serpym_e_submissions_values`
---
-ALTER TABLE `serpym_e_submissions_values`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `submission_id_index` (`submission_id`),
-  ADD KEY `key_index` (`key`);
-
---
--- Indices de la tabla `serpym_gdpr_cc_options`
---
-ALTER TABLE `serpym_gdpr_cc_options`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `serpym_links`
---
-ALTER TABLE `serpym_links`
-  ADD PRIMARY KEY (`link_id`),
-  ADD KEY `link_visible` (`link_visible`);
-
---
--- Indices de la tabla `serpym_options`
---
-ALTER TABLE `serpym_options`
-  ADD PRIMARY KEY (`option_id`),
-  ADD UNIQUE KEY `option_name` (`option_name`),
-  ADD KEY `autoload` (`autoload`);
-
---
--- Indices de la tabla `serpym_postmeta`
---
-ALTER TABLE `serpym_postmeta`
-  ADD PRIMARY KEY (`meta_id`),
-  ADD KEY `post_id` (`post_id`),
-  ADD KEY `meta_key` (`meta_key`(191));
-
---
--- Indices de la tabla `serpym_posts`
---
-ALTER TABLE `serpym_posts`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `post_name` (`post_name`(191)),
-  ADD KEY `type_status_date` (`post_type`,`post_status`,`post_date`,`ID`),
-  ADD KEY `post_parent` (`post_parent`),
-  ADD KEY `post_author` (`post_author`);
-
---
--- Indices de la tabla `serpym_termmeta`
---
-ALTER TABLE `serpym_termmeta`
-  ADD PRIMARY KEY (`meta_id`),
-  ADD KEY `term_id` (`term_id`),
-  ADD KEY `meta_key` (`meta_key`(191));
-
---
--- Indices de la tabla `serpym_terms`
---
-ALTER TABLE `serpym_terms`
-  ADD PRIMARY KEY (`term_id`),
-  ADD KEY `slug` (`slug`(191)),
-  ADD KEY `name` (`name`(191));
-
---
--- Indices de la tabla `serpym_term_relationships`
---
-ALTER TABLE `serpym_term_relationships`
-  ADD PRIMARY KEY (`object_id`,`term_taxonomy_id`),
-  ADD KEY `term_taxonomy_id` (`term_taxonomy_id`);
-
---
--- Indices de la tabla `serpym_term_taxonomy`
---
-ALTER TABLE `serpym_term_taxonomy`
-  ADD PRIMARY KEY (`term_taxonomy_id`),
-  ADD UNIQUE KEY `term_id_taxonomy` (`term_id`,`taxonomy`),
-  ADD KEY `taxonomy` (`taxonomy`);
-
---
--- Indices de la tabla `serpym_usermeta`
---
-ALTER TABLE `serpym_usermeta`
-  ADD PRIMARY KEY (`umeta_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `meta_key` (`meta_key`(191));
-
---
--- Indices de la tabla `serpym_users`
---
-ALTER TABLE `serpym_users`
-  ADD PRIMARY KEY (`ID`),
-  ADD KEY `user_login_key` (`user_login`),
-  ADD KEY `user_nicename` (`user_nicename`),
-  ADD KEY `user_email` (`user_email`);
-
---
--- Indices de la tabla `serpym_yoast_indexable`
---
-ALTER TABLE `serpym_yoast_indexable`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `object_type_and_sub_type` (`object_type`,`object_sub_type`),
-  ADD KEY `object_id_and_type` (`object_id`,`object_type`),
-  ADD KEY `permalink_hash_and_object_type` (`permalink_hash`,`object_type`),
-  ADD KEY `subpages` (`post_parent`,`object_type`,`post_status`,`object_id`),
-  ADD KEY `prominent_words` (`prominent_words_version`,`object_type`,`object_sub_type`,`post_status`),
-  ADD KEY `published_sitemap_index` (`object_published_at`,`is_robots_noindex`,`object_type`,`object_sub_type`);
-
---
--- Indices de la tabla `serpym_yoast_indexable_hierarchy`
---
-ALTER TABLE `serpym_yoast_indexable_hierarchy`
-  ADD PRIMARY KEY (`indexable_id`,`ancestor_id`),
-  ADD KEY `indexable_id` (`indexable_id`),
-  ADD KEY `ancestor_id` (`ancestor_id`),
-  ADD KEY `depth` (`depth`);
-
---
--- Indices de la tabla `serpym_yoast_migrations`
---
-ALTER TABLE `serpym_yoast_migrations`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `serpym_yoast_migrations_version` (`version`);
-
---
--- Indices de la tabla `serpym_yoast_primary_term`
---
-ALTER TABLE `serpym_yoast_primary_term`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `post_taxonomy` (`post_id`,`taxonomy`),
-  ADD KEY `post_term` (`post_id`,`term_id`);
-
---
--- Indices de la tabla `serpym_yoast_seo_links`
---
-ALTER TABLE `serpym_yoast_seo_links`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `link_direction` (`post_id`,`type`),
-  ADD KEY `indexable_link_direction` (`indexable_id`,`type`);
+  ADD UNIQUE KEY `setting_key` (`setting_key`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT de la tabla `serpym_commentmeta`
+-- AUTO_INCREMENT de la tabla `contact_submissions`
 --
-ALTER TABLE `serpym_commentmeta`
-  MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `contact_submissions`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `serpym_comments`
+-- AUTO_INCREMENT de la tabla `job_applications`
 --
-ALTER TABLE `serpym_comments`
-  MODIFY `comment_ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `job_applications`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `serpym_e_events`
+-- AUTO_INCREMENT de la tabla `settings`
 --
-ALTER TABLE `serpym_e_events`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_e_notes`
---
-ALTER TABLE `serpym_e_notes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_e_notes_users_relations`
---
-ALTER TABLE `serpym_e_notes_users_relations`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_e_submissions`
---
-ALTER TABLE `serpym_e_submissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_e_submissions_actions_log`
---
-ALTER TABLE `serpym_e_submissions_actions_log`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_e_submissions_values`
---
-ALTER TABLE `serpym_e_submissions_values`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_gdpr_cc_options`
---
-ALTER TABLE `serpym_gdpr_cc_options`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_links`
---
-ALTER TABLE `serpym_links`
-  MODIFY `link_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_options`
---
-ALTER TABLE `serpym_options`
-  MODIFY `option_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_postmeta`
---
-ALTER TABLE `serpym_postmeta`
-  MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_posts`
---
-ALTER TABLE `serpym_posts`
-  MODIFY `ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_termmeta`
---
-ALTER TABLE `serpym_termmeta`
-  MODIFY `meta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_terms`
---
-ALTER TABLE `serpym_terms`
-  MODIFY `term_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_term_taxonomy`
---
-ALTER TABLE `serpym_term_taxonomy`
-  MODIFY `term_taxonomy_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_usermeta`
---
-ALTER TABLE `serpym_usermeta`
-  MODIFY `umeta_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_users`
---
-ALTER TABLE `serpym_users`
-  MODIFY `ID` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_yoast_indexable`
---
-ALTER TABLE `serpym_yoast_indexable`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_yoast_migrations`
---
-ALTER TABLE `serpym_yoast_migrations`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_yoast_primary_term`
---
-ALTER TABLE `serpym_yoast_primary_term`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `serpym_yoast_seo_links`
---
-ALTER TABLE `serpym_yoast_seo_links`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+ALTER TABLE `settings`
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

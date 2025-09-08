@@ -172,46 +172,78 @@ document.addEventListener('DOMContentLoaded', () => {
     /**
      * Initialize contact form submission
      */
-    function initContactForm() {
-        const contactForm = document.querySelector('#contact-form form');
+function initContactForm() {
+    const contactForm = document.querySelector('#contact-form form');
+    
+    if (!contactForm) return;
+    
+    // Remove the preventDefault and AJAX submission
+    // Let the form submit normally to be handled by MVC
+    
+    // Just add basic client-side validation
+    contactForm.addEventListener('submit', (e) => {
+        const nombre = contactForm.querySelector('#nombre').value.trim();
+        const email = contactForm.querySelector('#email').value.trim();
+        const telefono = contactForm.querySelector('#telefono').value.trim();
+        const asunto = contactForm.querySelector('#asunto').value.trim();
+        const mensaje = contactForm.querySelector('#mensaje').value.trim();
         
-        if (!contactForm) return;
-
-        contactForm.addEventListener('submit', async (e) => {
+        if (!nombre || !email || !telefono || !asunto || !mensaje) {
             e.preventDefault();
+            alert('Por favor, completa todos los campos.');
+            return false;
+        }
+        
+        if (!isValidEmail(email)) {
+            e.preventDefault();
+            alert('Por favor, ingresa un email válido.');
+            return false;
+        }
+    });
+    
+    // Show success/error messages if present
+    showFormMessages();
+}
 
-            // Get form data
-            const formData = new FormData(contactForm);
-            const data = {
-                nombre: formData.get('nombre'),
-                email: formData.get('email'),
-                telefono: formData.get('telefono'),
-                asunto: formData.get('asunto'),
-                mensaje: formData.get('mensaje')
-            };
-
-            // Basic validation
-            if (!data.nombre || !data.email || !data.telefono || !data.asunto || !data.mensaje) {
-                alert('Por favor, completa todos los campos.');
-                return;
-            }
-
-            if (!isValidEmail(data.email)) {
-                alert('Por favor, ingresa un email válido.');
-                return;
-            }
-
-            try {
-                // Here you would typically send to your server
-                // For now, we'll just show a success message
-                alert('Mensaje enviado correctamente. Te contactaremos pronto.');
-                contactForm.reset();
-            } catch (error) {
-                alert('Hubo un error al enviar tu mensaje. Por favor, inténtalo de nuevo.');
-                console.error('Error:', error);
-            }
-        });
+function showFormMessages() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const success = urlParams.get('success');
+    const error = urlParams.get('error');
+    
+    if (success === '1') {
+        showAlert('Mensaje enviado correctamente. Te contactaremos pronto.', 'success');
+    } else if (error) {
+        let errorMessage = 'Error al enviar el mensaje.';
+        if (error === 'save_failed') {
+            errorMessage = 'Error al guardar el mensaje. Por favor, inténtalo de nuevo.';
+        } else if (error !== 'invalid_method') {
+            errorMessage = decodeURIComponent(error);
+        }
+        showAlert(errorMessage, 'error');
     }
+}
+
+function showAlert(message, type) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = `alert alert-${type}`;
+    alertDiv.textContent = message;
+    alertDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px;
+        border-radius: 5px;
+        z-index: 1000;
+        max-width: 400px;
+        ${type === 'success' ? 'background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;' : 'background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;'}
+    `;
+    
+    document.body.appendChild(alertDiv);
+    
+    setTimeout(() => {
+        alertDiv.remove();
+    }, 5000);
+}
 
     /**
      * Validate email format
