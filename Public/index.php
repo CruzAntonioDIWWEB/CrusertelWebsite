@@ -1,6 +1,4 @@
 <?php
-include '../Views/layouts/main.php';
-
 // Get requested page from URL, default to 'home'
 $page = $_GET['page'] ?? 'home';
 
