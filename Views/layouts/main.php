@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crusertel - Inicio</title>
-    <link rel="stylesheet" href="/dashboard/Crusertel/assets/css/main.css">
+    <link rel="stylesheet" href="/dashboard/CrusertelWebsite/assets/css/main.css+">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -29,10 +29,10 @@
                 include __DIR__ . '/../faq/index.php';
                 break;
             case 'tarifas':
-                include __DIR__ . '/../tarifas/index.php';
+                include __DIR__ . '/../tarifs/index.php';
                 break;
             case 'unete':
-                include __DIR__ . '/../unete/index.php';
+                include __DIR__ . '/../joinUs/index.php';
                 break;
             default:
                 include __DIR__ . '/../home/index.php';
