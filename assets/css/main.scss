@@ -1,7 +1,18 @@
-@import "estilo_contacto";
-@import "estilo_faq";
-@import "estilo_inicio";
-@import "estilo_servicios";
-@import "estilo_tarifas";
-@import "estilo_unete";
-@import "hugeMess";
+@use "variables/variables";
+@use "variables/color";
+@use "variables/typography";
+@use "variables/functions";
+@use "variables/buttons";
+@use "variables/layout";
+@use "variables/header_footer";
+@use "variables/animations";
+@use "variables/forms";
+
+// Section-specific styles (keep using @use or @import for now if not refactored)
+@use "estilo_contacto";
+@use "estilo_faq";
+@use "estilo_inicio";
+@use "estilo_servicios";
+@use "estilo_tarifas";
+@use "estilo_unete";
+@use "hugeMess";

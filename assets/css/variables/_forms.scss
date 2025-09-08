@@ -1,0 +1,31 @@
+@use "color";
+@use "typography";
+@use "buttons";
+
+
+.form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: color.$primary-red;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 12px;
+  border: 2px solid color.$accent-pink;
+  border-radius: 6px;
+  font-size: typography.$font-size-base;
+  transition: border-color 0.3s, box-shadow 0.3s;
+
+  &:focus, &:hover {
+    border-color: color.$primary-red;
+    box-shadow: 0 0 8px rgba(color.$primary-red, 0.3);
+    outline: none;
+  }
+}

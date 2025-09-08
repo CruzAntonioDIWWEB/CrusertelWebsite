@@ -1,0 +1,16 @@
+@use "color";
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.section {
+  background-color: color.$background-section;
+  padding: 40px 20px;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(color.$text-main, 0.05);
+}

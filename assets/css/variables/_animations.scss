@@ -1,0 +1,24 @@
+@keyframes slideDownFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-down-initial, .fade-in-up-initial, .slide-in-from-left-initial, .pop-in-initial {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+
+.animated-element {
+  opacity: 1;
+  transform: none;
+}

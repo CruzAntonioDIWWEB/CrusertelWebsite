@@ -1,0 +1,31 @@
+@use "color";
+@use "typography";
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: color.$text-light;
+  transition: box-shadow 0.3s, padding 0.3s;
+  padding: 8px 0;
+  box-shadow: 0 4px 8px rgba(color.$text-main, 0.15);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo img {
+  height: 40px;
+  border-radius: 7px;
+}
+
+footer {
+  background-color: color.$footer-bg;
+  color: color.$footer-text;
+  text-align: center;
+  padding: 20px 0;
+  border-radius: 0 0 8px 8px;
+}
