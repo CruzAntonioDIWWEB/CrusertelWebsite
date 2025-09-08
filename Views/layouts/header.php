@@ -8,7 +8,7 @@
                 <li><a href="index.php?page=services">Servicios</a></li>
                 <li><a href="index.php?page=faq">Preguntas Frecuentes</a></li>
                 <li><a href="index.php?page=contact">Contacto</a></li>
-                <li><a href="index.php?page=unete">Únete</a></li>
+                <li><a href="index.php?page=joinUs">Únete</a></li>
             </ul>
         </nav>
     </div>
