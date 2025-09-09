@@ -100,29 +100,29 @@ nav ul li a:hover {
 
 /* === HERO SECTION === */
 #hero {
-    background-color: #ffe6e6;
+    background-color: color.$accent-pink;
     text-align: center;
-    padding: 80px 20px;
-    margin-bottom: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+    padding: functions.rem(80) functions.rem(20);
+    margin-bottom: variables.$spacing-base + 10px;
+    border-radius: variables.$border-radius-base;
+    box-shadow: 0 4px 10px rgba(color.$text-main, 0.1);
 
-#hero h1 {
-    font-size: 3em;
-    color: #dc3545;
-}
+    h1 {
+        font-size: functions.rem(48);
+        color: color.$primary-red;
+    }
 
-#hero h2 {
-    font-size: 2.5em;
-    color: #dc3545;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
+    h2 {
+        font-size: functions.rem(40);
+        color: color.$primary-red;
+        margin-bottom: 15px;
+        font-weight: 700;
+    }
 
-#hero p {
-    font-size: 1.2em;
-    margin-bottom: 30px;
+    p {
+        font-size: typography.$font-size-lg;
+        margin-bottom: variables.$spacing-base + 10px;
+    }
 }
 
 .hero-logo {
@@ -141,17 +141,14 @@ nav ul li a:hover {
     background-repeat: no-repeat;
     position: relative;
     z-index: 1;
-}
 
-.hero-bg::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0);
-    z-index: -1;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(255, 255, 255, 0);
+        z-index: -1;
+    }
 }
 
 .reseñas-bg {
@@ -159,32 +156,29 @@ nav ul li a:hover {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    color: #e81515;
+    color: color.$primary-red;
     position: relative;
     z-index: 1;
-}
 
-.reseñas-bg::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0);
-    z-index: -1;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(255, 255, 255, 0);
+        z-index: -1;
+    }
 }
 
 .fondo-quienes {
-    background-color: #fff0f0;
-    padding: 40px 20px;
-    border-radius: 8px;
-    margin-bottom: 30px;
+    background-color: color.$background-section;
+    padding: functions.rem(40) functions.rem(20);
+    border-radius: variables.$border-radius-base;
+    margin-bottom: variables.$spacing-base + 10px;
 }
 
 .fondo-unete {
-    background-color: #ffe6e6;
-    padding: 60px 20px;
+    background-color: color.$accent-pink;
+    padding: functions.rem(60) functions.rem(20);
     text-align: center;
 }
 
@@ -264,59 +258,59 @@ section h2 {
 .service-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    gap: variables.$spacing-base + 5px;
 }
 
 .service-item {
-    background-color: #fff0f0;
-    padding: 25px;
-    border-radius: 8px;
+    background-color: color.$background-section;
+    padding: functions.rem(25);
+    border-radius: variables.$border-radius-base;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
-}
 
-.service-item:hover {
-    transform: scale(1.03);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    &:hover {
+        transform: scale(1.03);
+        box-shadow: 0 6px 12px rgba(color.$text-main, 0.1);
+    }
 }
 
 .grid-ventajas {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
-    margin-top: 40px;
+    gap: variables.$spacing-base + 10px;
+    margin-top: variables.$spacing-base + 20px;
 }
 
 .ventaja {
-    background-color: #fff0f0;
-    padding: 30px;
-    border-radius: 10px;
+    background-color: color.$background-section;
+    padding: functions.rem(30);
+    border-radius: variables.$border-radius-base + 2px;
     text-align: center;
-    transition: transform 0.3s ease;
-}
+    transition: transform 0.3s;
 
-.ventaja:hover {
-    transform: scale(1.03);
-}
+    &:hover {
+        transform: scale(1.03);
+    }
 
-.ventaja img {
-    max-width: 100px;
-    height: auto;
-    margin-bottom: 20px;
+    img {
+        max-width: 100px;
+        height: auto;
+        margin-bottom: 20px;
+    }
 }
 
 .requisitos-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
+    gap: variables.$spacing-base + 5px;
+    margin-top: variables.$spacing-base + 10px;
 }
 
 .requisito {
-    background-color: #fff0f0;
-    padding: 25px;
-    border-radius: 8px;
+    background-color: color.$background-section;
+    padding: functions.rem(25);
+    border-radius: variables.$border-radius-base;
     text-align: center;
 }
 
@@ -324,7 +318,7 @@ section h2 {
 .about-flex-container {
     display: flex;
     align-items: flex-start;
-    gap: 30px;
+    gap: variables.$spacing-base + 10px;
     flex-wrap: wrap;
 }
 
@@ -342,8 +336,8 @@ section h2 {
 .team-image {
     max-width: 100%;
     height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: variables.$border-radius-base + 2px;
+    box-shadow: 0 4px 8px rgba(color.$text-main, 0.1);
 }
 
 /* === SERVICES PAGE === */
@@ -671,16 +665,16 @@ section h2 {
 
 .cerrar {
     position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
+    top: functions.rem(15);
+    right: functions.rem(35);
+    color: color.$text-light;
+    font-size: functions.rem(40);
     font-weight: bold;
     cursor: pointer;
-}
 
-.cerrar:hover {
-    color: #bbb;
+    &:hover {
+        color: #bbb;
+    }
 }
 
 /* === UNETE PAGE === */
@@ -746,41 +740,37 @@ footer p {
 }
 
 /* === RESPONSIVE DESIGN === */
-@media (max-width: 768px) {
+@media (max-width: variables.$breakpoint-md) {
     .container {
         width: 95%;
         padding: 15px 0;
     }
-    
+
     nav ul {
         flex-direction: column;
         gap: 15px;
     }
-    
+
     #hero h1 {
-        font-size: 2.5em;
+        font-size: functions.rem(40);
     }
-    
+
     #hero h2 {
-        font-size: 2em;
+        font-size: functions.rem(32);
     }
-    
+
     .about-flex-container {
         flex-direction: column;
     }
-    
+
     .grid-ventajas {
         grid-template-columns: 1fr;
     }
-    
-    .contenedor-tarifas {
+
+    .service-grid {
         grid-template-columns: 1fr;
     }
-    
-    .contact-info-grid {
-        grid-template-columns: 1fr;
-    }
-    
+
     .footer-content {
         flex-direction: column;
         gap: 10px;
@@ -791,21 +781,17 @@ footer p {
     .logo img {
         height: 35px;
     }
-    
+
     nav ul li a {
         font-size: 1em;
     }
-    
+
     #hero h1 {
-        font-size: 2em;
+        font-size: functions.rem(32);
     }
-    
+
     #hero h2 {
-        font-size: 1.8em;
-    }
-    
-    .titulo-principal {
-        font-size: 2.5em;
+        font-size: functions.rem(28);
     }
 }
 
@@ -813,24 +799,24 @@ footer p {
 .reseña-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px;
-    margin-top: 30px;
+    gap: variables.$spacing-base + 5px;
+    margin-top: variables.$spacing-base + 10px;
 }
 
 .reseña-item {
     background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 8px;
+    padding: functions.rem(20);
+    border-radius: variables.$border-radius-base;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+    box-shadow: 0 4px 10px rgba(color.$text-main, 0.1);
 
-.reseña-item p {
-    font-style: italic;
-    margin-bottom: 15px;
-}
+    p {
+        font-style: italic;
+        margin-bottom: 15px;
+    }
 
-.reseña-item span {
-    font-weight: bold;
-    color: #dc3545;
+    span {
+        font-weight: bold;
+        color: color.$primary-red;
+    }
 }

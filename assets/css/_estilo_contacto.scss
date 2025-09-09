@@ -1,3 +1,12 @@
+@use "variables/color";
+@use "variables/typography";
+@use "variables/buttons";
+@use "variables/layout";
+@use "variables/animations";
+@use "variables/forms";
+@use "variables/variables";
+@use "variables/functions";
+
 body {
     font-family: 'Inter', sans-serif;
     margin: 0;
@@ -33,24 +42,31 @@ header {
     top: 0;
     z-index: 999;
     background-color: #fff;
-    transition: box-shadow 0.3s ease, padding 0.3s ease;
-    padding: 8px 0; /* Reducido desde 15px o más */
+    transition: box-shadow 0.3s ease;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
+/* Estructura horizontal del header */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Logo alineado a la izquierda */
 .logo img {
-    height: 40px; /* Más pequeño que los 50px anteriores */
+    height: 40px;
     border-radius: 7px;
 }
 
+/* Menú alineado a la derecha */
 nav ul {
-    list-style: none;
     display: flex;
+    gap: 25px;
+    list-style: none;
     margin: 0;
     padding: 0;
-}
-
-nav ul li {
-    margin-left: 25px;
 }
 
 nav ul li a {
@@ -153,83 +169,43 @@ footer p {
     font-size: 0.9em;
 }
 .reseñas-bg {
-    background-image: url('assets/img/background/imagen_reseñas_fondo.jpg'); /* usa el nombre correcto del archivo */
+    background-image: url('assets/img/background/imagen_reseñas_fondo.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    color: #e81515; /* opcional: para asegurar que el texto sea visible sobre el fondo */
+    color: color.$primary-red;
     position: relative;
     z-index: 1;
-}
 
-.reseñas-bg::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0); /* filtro blanco translúcido encima del fondo */
-    z-index: -1;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(255, 255, 255, 0);
+        z-index: -1;
+    }
 }
 
 .hero-bg {
-    background-image: url('assets/img/background/imagen_hero_fondo.jpg'); /* Asegúrate que este nombre coincide con tu archivo */
+    background-image: url('assets/img/background/imagen_hero_fondo.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
     z-index: 1;
-}
 
-.hero-bg::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0); /* Filtro blanco translúcido */
-    z-index: -1;
-}
-
-header {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    background-color: #fff;
-    transition: box-shadow 0.3s ease;
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(255, 255, 255, 0);
+        z-index: -1;
+    }
 }
 
 /* Clase que se activa al hacer scroll */
 .header-scrolled {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-.header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-nav ul {
-    display: flex;
-    gap: 25px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #dc3545;
-    font-weight: bold;
-    font-size: 1.1em;
-    transition: color 0.3s ease, transform 0.2s ease;
-}
-
-nav ul li a:hover {
-    color: #b1001d;
-    transform: scale(1.1);
 }
 
 .faq-respuesta {
@@ -273,257 +249,135 @@ nav ul li a:hover {
 }
 /* === Estilo mejorado para el formulario de contacto === */
 #contact-form {
-    background-color: #fff0f0;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    background-color: color.$background-section;
+    padding: variables.$spacing-base + 10px;
+    border-radius: variables.$border-radius-base + 2px;
+    box-shadow: 0 6px 15px rgba(color.$text-main, 0.1);
     max-width: 700px;
     margin: 0 auto;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+        transform: scale(1.01);
+        box-shadow: 0 10px 20px rgba(color.$text-main, 0.15);
+    }
 }
 
-#contact-form:hover {
-    transform: scale(1.01);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-}
-
-.form-group {
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-}
-
-.form-group label {
-    font-weight: bold;
-    margin-bottom: 8px;
-    color: #dc3545;
-}
-
-.form-group input,
-.form-group textarea {
-    padding: 12px;
-    border: 2px solid #ffbcbc;
-    border-radius: 6px;
-    font-size: 1em;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.form-group input:focus,
-.form-group textarea:focus {
-    border-color: #dc3545;
-    box-shadow: 0 0 8px rgba(220, 53, 69, 0.3);
-    outline: none;
-}
-
-/* Animaciones hover en campos */
-.form-group input:hover,
-.form-group textarea:hover {
-    border-color: #dc3545;
-}
-
-/* Botón con efecto animado */
 #contact-form .btn {
-    background-color: #dc3545;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    border-radius: 5px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    @extend .btn;
     width: 100%;
     margin-top: 10px;
+    box-shadow: none;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+
+    &:hover {
+        box-shadow: 0 4px 12px rgba(color.$text-main, 0.15);
+    }
 }
 
-#contact-form .btn:hover {
-    background-color: #b1001d;
-    transform: scale(1.05);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
 /* === Estilo para "Nuestra información de contacto" === */
 #contact-info {
-    background-color: #fff0f0;
-    border-radius: 10px;
-    padding: 40px 30px;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    background-color: color.$background-section;
+    border-radius: variables.$border-radius-base + 2px;
+    padding: functions.rem(40) functions.rem(30);
+    box-shadow: 0 6px 15px rgba(color.$text-main, 0.08);
     max-width: 900px;
     margin: 0 auto 40px auto;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s;
+
+    &:hover {
+        transform: scale(1.01);
+    }
+
+    h3 {
+        text-align: center;
+        color: color.$primary-red;
+        font-size: functions.rem(29);
+        margin-bottom: variables.$spacing-base + 10px;
+    }
 }
 
-#contact-info:hover {
-    transform: scale(1.01);
-}
-
-#contact-info h3 {
-    text-align: center;
-    color: #dc3545;
-    font-size: 1.8em;
-    margin-bottom: 30px;
-}
-
-/* Estilo para las tarjetas de contacto */
 .contact-cards {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 25px;
+    gap: variables.$spacing-base + 5px;
 }
 
 .contact-card {
-    background: #ffffff;
-    border: 2px solid #ffbcbc;
-    border-radius: 8px;
-    padding: 20px 25px;
+    background: color.$text-light;
+    border: 2px solid color.$accent-pink;
+    border-radius: variables.$border-radius-base;
+    padding: functions.rem(20) functions.rem(25);
     width: 260px;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 10px rgba(color.$text-main, 0.05);
+    transition: box-shadow 0.3s, transform 0.3s;
+
+    &:hover {
+        box-shadow: 0 8px 20px rgba(color.$text-main, 0.12);
+        transform: translateY(-5px);
+    }
+
+    h4 {
+        margin-bottom: 10px;
+        color: color.$primary-dark;
+        font-size: functions.rem(19);
+    }
+
+    p {
+        margin: 0;
+        font-size: typography.$font-size-base;
+        color: color.$text-main;
+    }
+
+    a {
+        color: color.$primary-red;
+        text-decoration: none;
+        font-weight: bold;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 
-.contact-card:hover {
-    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
-    transform: translateY(-5px);
-}
-
-.contact-card h4 {
-    margin-bottom: 10px;
-    color: #b1001d;
-    font-size: 1.2em;
-}
-
-.contact-card p {
-    margin: 0;
-    font-size: 1em;
-    color: #333;
-}
-
-.contact-card a {
-    color: #dc3545;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.contact-card a:hover {
-    text-decoration: underline;
-}
 /* === Estilo para la sección introductoria de contacto === */
 #contact-intro {
     text-align: center;
-    padding: 40px 30px;
-    background-color: #ffe6e6;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    padding: functions.rem(40) functions.rem(30);
+    background-color: color.$accent-pink;
+    border-radius: variables.$border-radius-base + 2px;
+    box-shadow: 0 4px 12px rgba(color.$text-main, 0.05);
     margin-bottom: 40px;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
-}
-
-#contact-intro h2 {
-    font-size: 2.5em;
-    color: #dc3545;
-    margin-bottom: 15px;
-    font-weight: 700;
-}
-
-#contact-intro p {
-    font-size: 1.2em;
-    font-weight: 500;
-    color: #333;
-    line-height: 1.6;
-    max-width: 700px;
-    margin: 0 auto;
-}
-
-/* Animación opcional al aparecer */
-#contact-intro {
     opacity: 0;
     transform: translateY(20px);
-    animation: fadeInUp 0.8s ease forwards;
-}
 
-@keyframes fadeInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    h2 {
+        font-size: functions.rem(40);
+        color: color.$primary-red;
+        margin-bottom: 15px;
+        font-weight: 700;
     }
-}
-/* Estilo del header (ya tienes parte de esto, pero revisa todo este bloque) */
-header {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    background-color: #fff;
-    padding: 10px 0;
-    transition: box-shadow 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
 
-/* Estructura horizontal del header */
-.header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-/* Logo alineado a la izquierda */
-.logo img {
-    height: 40px;
-    border-radius: 7px;
-}
-
-/* Menú alineado a la derecha */
-nav ul {
-    display: flex;
-    gap: 25px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #dc3545;
-    font-weight: bold;
-    font-size: 1.1em;
-    transition: color 0.3s ease, transform 0.2s ease;
-}
-
-nav ul li a:hover {
-    color: #b1001d;
-    transform: scale(1.1);
-}
-/* === Animación de entrada para el header === */
-header {
-    animation: slideDownFade 0.8s ease-out forwards;
-    opacity: 0;
-    transform: translateY(-20px);
-}
-
-@keyframes slideDownFade {
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    p {
+        font-size: functions.rem(19);
+        font-weight: 500;
+        color: color.$text-main;
+        line-height: 1.6;
+        max-width: 700px;
+        margin: 0 auto;
     }
-}
-#contact-intro {
-    background-image: url('assets/img/background/imagen_hero_fondo.jpg'); /* o usa el nombre real */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    padding: 80px 20px;
-    color: white;
-    text-align: center;
-    position: relative;
 }
 
 #contact-intro .container {
     background-color: rgba(255, 255, 255, 0.85);
-    padding: 30px;
-    border-radius: 10px;
-    color: #333;
+    padding: functions.rem(30);
+    border-radius: variables.$border-radius-base + 2px;
+    color: color.$text-main;
     max-width: 800px;
     margin: 0 auto;
 }

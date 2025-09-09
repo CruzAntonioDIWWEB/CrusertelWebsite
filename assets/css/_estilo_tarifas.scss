@@ -1,7 +1,24 @@
+@use "variables/color";
+@use "variables/typography";
+@use "variables/buttons";
+@use "variables/layout";
+@use "variables/animations";
+@use "variables/variables";
+@use "variables/functions";
+
+// Custom color variables for this section
+$tarifa-bg: #1a1a1a;
+$tarifa-shadow: rgba(255, 255, 255, 0.1);
+$neon-cyan: #00ffcc;
+$neon-cyan-dark: #00ccaa;
+$neon-pink: #ff3366;
+$tarifa-red: #ff0033;
+$tarifa-red-dark: #cc002a;
+
 body {
-    background-color: #000000; /* Fondo completamente negro */
-    color: white;
-    font-family: Arial, sans-serif;
+    background-color: $tarifa-bg;
+    color: color.$text-light;
+    font-family: typography.$font-main;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -9,143 +26,73 @@ body {
 
 h1 {
     text-align: center;
-    padding: 20px 0;
-    color: white;
-}
-
-.contenedor-tarifas {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 40px;
-    gap: 20px;
-}
-
-.tarifa {
-    background-color: #1a1a1a;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
-    width: 300px;
-    transition: transform 0.3s ease;
-}
-
-.tarifa:hover {
-    transform: scale(1.05);
-}
-
-.tarifa img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-.tarifa h3,
-.tarifa p {
-    padding: 10px;
-    color: white;
-}
-/* Estilo para el modal */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 9999;
-    padding-top: 60px;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.9);
-}
-
-.modal-contenido {
-    margin: auto;
-    display: block;
-    max-width: 90%;
-    max-height: 80vh;
-    border-radius: 8px;
-}
-
-.cerrar {
-    position: absolute;
-    top: 20px;
-    right: 35px;
-    color: #fff;
-    font-size: 40px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.cerrar:hover,
-.cerrar:focus {
-    color: #bbb;
-    text-decoration: none;
-}
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
-
-body {
-    background-color: #000000;
-    color: white;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+    padding: functions.rem(20) 0;
+    color: color.$text-light;
 }
 
 .titulo-principal {
-    font-family: 'Orbitron', sans-serif;
+    font-family: typography.$font-title;
     font-size: 3rem;
-    color: #00ffcc;
+    color: $tarifa-red;
     margin: 30px 0;
-    text-shadow: 0 0 10px #00ffcc;
+    text-shadow:
+        0 0 5px $tarifa-red,
+        0 0 10px $tarifa-red,
+        0 0 20px $tarifa-red,
+        0 0 40px $tarifa-red;
 }
 
 .subtitulo {
     font-size: 2rem;
-    color: #ff3366;
+    color: $neon-pink;
     margin-bottom: 20px;
     text-transform: uppercase;
 }
 
 .seccion-tarifas {
-    padding: 40px 20px;
-    border-top: 2px solid #333;
+    padding: functions.rem(40) functions.rem(20);
+    border-top: 2px solid $tarifa-bg;
 }
 
 .contenedor-tarifas {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 20px;
+    gap: variables.$spacing-base;
+    padding: functions.rem(40);
 }
 
 .tarifa {
-    background-color: #1a1a1a;
-    border-radius: 10px;
+    background-color: $tarifa-bg;
+    border-radius: variables.$border-radius-base + 2px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 8px $tarifa-shadow;
     width: 300px;
     transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    h3,
+    p {
+        padding: functions.rem(10);
+        color: color.$text-light;
+    }
 }
 
-.tarifa:hover {
-    transform: scale(1.05);
-}
-
-.tarifa img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Modal */
+/* Estilo para el modal */
 .modal {
     display: none;
     position: fixed;
     z-index: 9999;
-    padding-top: 60px;
+    padding-top: functions.rem(60);
     left: 0;
     top: 0;
     width: 100%;
@@ -159,77 +106,47 @@ body {
     display: block;
     max-width: 90%;
     max-height: 80vh;
-    border-radius: 8px;
+    border-radius: variables.$border-radius-base;
 }
 
 .cerrar {
     position: absolute;
-    top: 20px;
-    right: 35px;
-    color: #fff;
-    font-size: 40px;
+    top: functions.rem(20);
+    right: functions.rem(35);
+    color: color.$text-light;
+    font-size: 2.5rem;
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
+
+    &:hover,
+    &:focus {
+        color: #bbb;
+        text-decoration: none;
+    }
 }
 
-.cerrar:hover,
-.cerrar:focus {
-    color: #bbb;
-    text-decoration: none;
-}
 .boton-volver {
     position: fixed;
-    bottom: 30px;
-    left: 30px;
-    padding: 12px 20px;
-    background-color: #00ffcc;
-    color: #000;
+    bottom: functions.rem(30);
+    left: functions.rem(30);
+    padding: functions.rem(12) functions.rem(20);
+    background-color: $tarifa-red;
+    color: color.$text-light;
     border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0, 255, 204, 0.3);
-    transition: background-color 0.3s ease;
-    z-index: 9999;
-}
-
-.boton-volver:hover {
-    background-color: #00ccaa;
-}
-.titulo-principal {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 3rem;
-    color: #ff0033;
-    margin: 30px 0;
-    text-shadow: 
-        0 0 5px #ff0033,
-        0 0 10px #ff0033,
-        0 0 20px #ff0033,
-        0 0 40px #ff0033;
-}
-.boton-volver {
-    position: fixed;
-    bottom: 30px;
-    left: 30px;
-    padding: 12px 20px;
-    background-color: #ff0033;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
+    border-radius: variables.$border-radius-base;
+    font-size: 1rem;
     cursor: pointer;
     font-weight: bold;
     box-shadow:
-        0 0 5px #ff0033,
-        0 0 10px #ff0033,
-        0 0 20px #ff0033,
-        0 0 30px #ff0033;
+        0 0 5px $tarifa-red,
+        0 0 10px $tarifa-red,
+        0 0 20px $tarifa-red,
+        0 0 30px $tarifa-red;
     transition: background-color 0.3s ease;
     z-index: 9999;
-}
 
-.boton-volver:hover {
-    background-color: #cc002a;
+    &:hover {
+        background-color: $tarifa-red-dark;
+    }
 }
