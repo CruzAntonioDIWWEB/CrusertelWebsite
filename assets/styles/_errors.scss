@@ -1,0 +1,68 @@
+@use "variables/color";
+@use "variables/typography";
+@use "variables/buttons";
+@use "variables/layout";
+@use "variables/variables";
+@use "variables/functions";
+
+.error-section {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: functions.rem(32) 0;
+}
+
+.error-content {
+    max-width: 500px;
+}
+
+.error-code {
+    font-size: functions.rem(128);
+    font-weight: bold;
+    color: color.$primary-red;
+    margin: 0;
+    line-height: 1;
+}
+
+.error-title {
+    font-size: functions.rem(32);
+    margin: functions.rem(16) 0;
+    color: color.$text-main;
+}
+
+.error-message {
+    font-size: functions.rem(18);
+    margin-bottom: functions.rem(32);
+}
+
+.error-actions {
+    display: flex;
+    gap: functions.rem(16);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    @extend .btn;
+    padding: functions.rem(12) functions.rem(24);
+    text-decoration: none;
+    border-radius: variables.$border-radius-base;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: color.$primary-red;
+    color: color.$text-light;
+
+    &:hover {
+        background-color: color.$primary-dark;
+    }
+}
+
+.btn-secondary {
+    background-color: color.$text-main;
+    color: white;
+}

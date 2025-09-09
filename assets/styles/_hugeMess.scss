@@ -1,6 +1,15 @@
 /* ================================== */
 /* CRUSERTEL - CONSOLIDATED CSS      */
 /* ================================== */
+@use "variables/color";
+@use "variables/typography";
+@use "variables/buttons";
+@use "variables/layout";
+@use "variables/animations";
+@use "variables/header_footer";
+@use "variables/variables";
+@use "variables/functions";
+
 
 /* === BASE STYLES === */
 body {
