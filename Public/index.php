@@ -1,10 +1,11 @@
 <?php
-// Error reporting for development (remove in production)
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+/**
+ * Crusertel Website Entry Point
+ * Final version with Composer and proper error handling
+ */
 
-// Start session if needed
-session_start();
+// Bootstrap the application
+require_once '../bootstrap.php';
 
 // Get requested page from URL, default to 'home'
 $page = $_GET['page'] ?? 'home';
@@ -19,9 +20,9 @@ try {
     // Route to the correct controller/view
     switch ($page) {
         case 'contact':
-            require_once '../Controllers/ContactController.php';
             $controller = new \Controllers\ContactController();
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                error_log("Contact form POST request received");
                 $controller->submitContactForm();
             } else {
                 $controller->showContactForm();
@@ -29,47 +30,58 @@ try {
             break;
             
         case 'faq':
-            require_once '../Controllers/BaseController.php';
-            $controller = new \BaseController\BaseController();
+            $controller = new \Controllers\BaseController();
             $controller->loadView('faq/index', ['title' => 'FAQ - Crusertel']);
             break;
             
         case 'services':
-            require_once '../Controllers/BaseController.php';
-            $controller = new \BaseController\BaseController();
+            $controller = new \Controllers\BaseController();
             $controller->loadView('services/index', ['title' => 'Servicios - Crusertel']);
             break;
             
         case 'tarifs':
-            require_once '../Controllers/BaseController.php';
-            $controller = new \BaseController\BaseController();
+            $controller = new \Controllers\BaseController();
             $controller->loadView('tarifs/index', ['title' => 'Tarifas - Crusertel']);
             break;
             
         case 'joinUs':
-            require_once '../Controllers/BaseController.php';
-            $controller = new \BaseController\BaseController();
+            $controller = new \Controllers\BaseController();
             $controller->loadView('joinUs/index', ['title' => 'Únete - Crusertel']);
             break;
             
         case 'home':
         default:
-            require_once '../Controllers/BaseController.php';
-            $controller = new \BaseController\BaseController();
+            $controller = new \Controllers\BaseController();
             $controller->loadView('home/index', ['title' => 'Inicio - Crusertel']);
             break;
     }
 } catch (Exception $e) {
-    // Log error
-    error_log("Error in index.php: " . $e->getMessage());
+    // Enhanced error logging
+    error_log("Application Error: " . $e->getMessage());
+    error_log("File: " . $e->getFile());
+    error_log("Line: " . $e->getLine());
+    error_log("Stack trace: " . $e->getTraceAsString());
     
     // Show error page
     http_response_code(500);
-    require_once '../Controllers/BaseController.php';
-    $controller = new \BaseController\BaseController();
-    $controller->loadView('error/500', [
-        'title' => 'Error - Crusertel',
-        'message' => 'Ha ocurrido un error interno. Por favor, inténtalo más tarde.'
-    ]);
+    
+    try {
+        $controller = new \Controllers\BaseController();
+        $errorMessage = ($_ENV['APP_DEBUG'] === 'true') 
+            ? 'Error: ' . $e->getMessage() . ' in ' . basename($e->getFile()) . ' line ' . $e->getLine()
+            : 'Ha ocurrido un error interno. Por favor, inténtalo más tarde.';
+            
+        $controller->loadView('error/500', [
+            'title' => 'Error - Crusertel',
+            'message' => $errorMessage
+        ]);
+    } catch (Exception $errorException) {
+        // Fallback if even error page fails
+        echo '<!DOCTYPE html><html><head><title>Error - Crusertel</title></head><body>';
+        echo '<h1>Error del Sistema</h1>';
+        echo '<p>Ha ocurrido un error interno. Por favor, contacta con el administrador.</p>';
+        echo '<p><a href="index.php?page=home">Volver al inicio</a></p>';
+        echo '</body></html>';
+    }
 }
 ?>
