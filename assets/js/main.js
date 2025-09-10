@@ -1,525 +1,466 @@
 /* ================================== */
-/* CRUSERTEL - CONSOLIDATED JAVASCRIPT */
+/* CRUSERTEL - OPTIMIZED JAVASCRIPT  */
 /* ================================== */
 
-document.addEventListener('DOMContentLoaded', () => {
+/**
+ * Main application object to avoid global namespace pollution
+ */
+const CrusertelApp = {
     
-    // ===================================
-    // COMMON ANIMATION FUNCTIONS
-    // ===================================
-    
-    /**
-     * Animate elements with delay
-     */
-    function animateElement(element, delay) {
-        if (!element) return;
-        setTimeout(() => {
-            element.classList.add('animated-element');
-        }, delay);
-    }
+    // Configuration
+    config: {
+        animationDelay: 150,
+        pulseInterval: 800,
+        scrollThreshold: 20,
+        debounceDelay: 250
+    },
 
-    /**
-     * Initialize all animated elements
-     */
-    function initAnimations() {
-        const allAnimated = document.querySelectorAll(
-            '.fade-in-up-initial, .fade-in-down-initial, .slide-in-from-left-initial, .pop-in-initial'
-        );
-
-        allAnimated.forEach((el, index) => {
-            animateElement(el, 300 + index * 150);
-        });
-    }
+    // State management
+    state: {
+        isInitialized: false,
+        currentPage: null,
+        activeIntervals: new Map()
+    },
 
     // ===================================
-    // HEADER SCROLL EFFECT
+    // INITIALIZATION
     // ===================================
     
-    /**
-     * Add scrolled class to header when scrolling
-     */
-    function initHeaderScroll() {
-        const header = document.querySelector('header');
-        if (!header) return;
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 20) {
-                header.classList.add('header-scrolled');
-            } else {
-                header.classList.remove('header-scrolled');
-            }
-        });
-    }
-
-    // ===================================
-    // SERVICE ITEMS HOVER EFFECTS
-    // ===================================
-    
-    /**
-     * Add pulsing effect to service items on hover
-     */
-    function initServiceItemsEffects() {
-        const serviceItems = document.querySelectorAll('.service-item');
+    init() {
+        if (this.state.isInitialized) return;
         
-        serviceItems.forEach((item) => {
-            let pulseInterval;
-
-            item.addEventListener('mouseenter', () => {
-                item.classList.add('pulsing');
-                pulseInterval = setInterval(() => {
-                    item.classList.toggle('pulsing');
-                }, 800);
-            });
-
-            item.addEventListener('mouseleave', () => {
-                item.classList.remove('pulsing');
-                clearInterval(pulseInterval);
-            });
-        });
-    }
-
-    // ===================================
-    // IMAGE HOVER EFFECTS
-    // ===================================
-    
-    /**
-     * Add grow effect to images with specific class
-     */
-    function initImageHoverEffects() {
-        const hoverImages = document.querySelectorAll('.img-hover-grow');
+        this.state.currentPage = this.getCurrentPage();
+        console.log(`${this.state.currentPage} page loaded`);
         
-        hoverImages.forEach(image => {
-            image.style.transition = 'transform 0.4s ease';
+        // Initialize all modules
+        this.animations.init();
+        this.header.init();
+        this.interactions.init();
+        this.forms.init();
+        this.navigation.init();
+        this.ui.init();
+        
+        this.state.isInitialized = true;
+    },
 
-            image.addEventListener('mouseenter', () => {
-                image.style.transform = 'scale(1.1)';
-            });
-
-            image.addEventListener('mouseleave', () => {
-                image.style.transform = 'scale(1)';
-            });
-        });
-    }
+    getCurrentPage() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('page') || 'home';
+    },
 
     // ===================================
-    // MOBILE MENU FUNCTIONALITY
+    // ANIMATIONS MODULE
     // ===================================
     
-    /**
-     * Initialize mobile menu toggle
-     */
-    function initMobileMenu() {
-        const menuToggle = document.getElementById('menu-toggle');
-        const mainNav = document.querySelector('.main-nav');
+    animations: {
+        animateElement(element, delay) {
+            if (!element) return;
+            setTimeout(() => {
+                element.classList.add('animated-element');
+            }, delay);
+        },
 
-        if (menuToggle && mainNav) {
-            menuToggle.addEventListener('click', function() {
-                mainNav.classList.toggle('menu-abierto');
+        init() {
+            const allAnimated = document.querySelectorAll(
+                '.fade-in-up-initial, .fade-in-down-initial, .slide-in-from-left-initial, .pop-in-initial'
+            );
+
+            allAnimated.forEach((el, index) => {
+                this.animateElement(el, 300 + index * CrusertelApp.config.animationDelay);
             });
         }
-    }
+    },
 
     // ===================================
-    // TARIFAS MODAL FUNCTIONALITY
+    // HEADER MODULE
     // ===================================
     
-    /**
-     * Initialize modal for tarifa images
-     */
-    function initTarifasModal() {
-        const imagenes = document.querySelectorAll('.tarifa img');
-        const modal = document.getElementById('modal');
-        const modalImg = document.getElementById('imgAmpliada');
-        const cerrar = document.querySelector('.cerrar');
+    header: {
+        init() {
+            const header = document.querySelector('header');
+            if (!header) return;
 
-        if (!modal || !modalImg || imagenes.length === 0) return;
+            const scrollHandler = CrusertelApp.utils.debounce(() => {
+                if (window.scrollY > CrusertelApp.config.scrollThreshold) {
+                    header.classList.add('header-scrolled');
+                } else {
+                    header.classList.remove('header-scrolled');
+                }
+            }, CrusertelApp.config.debounceDelay);
 
-        // Open modal when clicking on tarifa images
-        imagenes.forEach(img => {
-            img.addEventListener('click', () => {
-                modal.style.display = 'block';
-                modalImg.src = img.src;
-                modalImg.alt = img.alt;
-            });
-        });
-
-        // Close modal when clicking close button
-        if (cerrar) {
-            cerrar.addEventListener('click', () => {
-                modal.style.display = 'none';
-            });
+            window.addEventListener('scroll', scrollHandler, { passive: true });
         }
-
-        // Close modal when clicking outside of it
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.style.display === 'block') {
-                modal.style.display = 'none';
-            }
-        });
-    }
+    },
 
     // ===================================
-    // CONTACT FORM FUNCTIONALITY
+    // INTERACTIONS MODULE
     // ===================================
     
-    /**
-     * Initialize contact form submission
-     */
-function initContactForm() {
-    const contactForm = document.querySelector('#contact-form form');
-    
-    if (!contactForm) return;
-    
-    // Remove the preventDefault and AJAX submission
-    // Let the form submit normally to be handled by MVC
-    
-    // Just add basic client-side validation
-    contactForm.addEventListener('submit', (e) => {
-        const nombre = contactForm.querySelector('#nombre').value.trim();
-        const email = contactForm.querySelector('#email').value.trim();
-        const telefono = contactForm.querySelector('#telefono').value.trim();
-        const asunto = contactForm.querySelector('#asunto').value.trim();
-        const mensaje = contactForm.querySelector('#mensaje').value.trim();
-        
-        if (!nombre || !email || !telefono || !asunto || !mensaje) {
-            e.preventDefault();
-            alert('Por favor, completa todos los campos.');
-            return false;
-        }
-        
-        if (!isValidEmail(email)) {
-            e.preventDefault();
-            alert('Por favor, ingresa un email válido.');
-            return false;
-        }
-    });
-    
-    // Show success/error messages if present
-    showFormMessages();
-}
-
-function showFormMessages() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const success = urlParams.get('success');
-    const error = urlParams.get('error');
-    
-    if (success === '1') {
-        showAlert('Mensaje enviado correctamente. Te contactaremos pronto.', 'success');
-    } else if (error) {
-        let errorMessage = 'Error al enviar el mensaje.';
-        if (error === 'save_failed') {
-            errorMessage = 'Error al guardar el mensaje. Por favor, inténtalo de nuevo.';
-        } else if (error !== 'invalid_method') {
-            errorMessage = decodeURIComponent(error);
-        }
-        showAlert(errorMessage, 'error');
-    }
-}
-
-function showAlert(message, type) {
-    const alertDiv = document.createElement('div');
-    alertDiv.className = `alert alert-${type}`;
-    alertDiv.textContent = message;
-    alertDiv.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 15px;
-        border-radius: 5px;
-        z-index: 1000;
-        max-width: 400px;
-        ${type === 'success' ? 'background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb;' : 'background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;'}
-    `;
-    
-    document.body.appendChild(alertDiv);
-    
-    setTimeout(() => {
-        alertDiv.remove();
-    }, 5000);
-}
-
-    /**
-     * Validate email format
-     */
-    function isValidEmail(email) {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(email);
-    }
-
-    // ===================================
-    // FAQ FUNCTIONALITY
-    // ===================================
-    
-    /**
-     * Initialize FAQ accordion functionality
-     */
-    function initFAQAccordion() {
-        const faqItems = document.querySelectorAll('.faq-item');
-        
-        faqItems.forEach(item => {
-            const question = item.querySelector('h3');
-            const answer = item.querySelector('.faq-respuesta');
+    interactions: {
+        initServiceItems() {
+            const serviceItems = document.querySelectorAll('.service-item');
             
-            if (question && answer) {
-                question.style.cursor = 'pointer';
-                
-                // Toggle answer on click instead of hover
-                question.addEventListener('click', () => {
-                    const isOpen = answer.style.maxHeight && answer.style.maxHeight !== '0px';
+            serviceItems.forEach((item) => {
+                const intervalId = `service-${Math.random().toString(36).substr(2, 9)}`;
+
+                item.addEventListener('mouseenter', () => {
+                    item.classList.add('pulsing');
+                    const pulse = setInterval(() => {
+                        item.classList.toggle('pulsing');
+                    }, CrusertelApp.config.pulseInterval);
                     
-                    // Close all other FAQ items
-                    faqItems.forEach(otherItem => {
-                        const otherAnswer = otherItem.querySelector('.faq-respuesta');
-                        if (otherAnswer && otherAnswer !== answer) {
-                            otherAnswer.style.maxHeight = '0px';
-                            otherAnswer.style.opacity = '0';
+                    CrusertelApp.state.activeIntervals.set(intervalId, pulse);
+                });
+
+                item.addEventListener('mouseleave', () => {
+                    item.classList.remove('pulsing');
+                    const pulse = CrusertelApp.state.activeIntervals.get(intervalId);
+                    if (pulse) {
+                        clearInterval(pulse);
+                        CrusertelApp.state.activeIntervals.delete(intervalId);
+                    }
+                });
+            });
+        },
+
+        initImageHovers() {
+            const hoverImages = document.querySelectorAll('.img-hover-grow');
+            
+            hoverImages.forEach(image => {
+                // Just add the CSS class - no inline styles
+                image.classList.add('js-hover-enabled');
+            });
+        },
+
+        initFAQAccordion() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('h3');
+                const answer = item.querySelector('.faq-respuesta');
+                
+                if (question && answer) {
+                    question.classList.add('faq-question-clickable');
+                    
+                    question.addEventListener('click', () => {
+                        const isOpen = answer.classList.contains('faq-answer-open');
+                        
+                        // Close all other FAQ items
+                        faqItems.forEach(otherItem => {
+                            const otherAnswer = otherItem.querySelector('.faq-respuesta');
+                            if (otherAnswer && otherAnswer !== answer) {
+                                otherAnswer.classList.remove('faq-answer-open');
+                            }
+                        });
+                        
+                        // Toggle current item
+                        if (isOpen) {
+                            answer.classList.remove('faq-answer-open');
+                        } else {
+                            answer.classList.add('faq-answer-open');
                         }
                     });
-                    
-                    // Toggle current item
-                    if (isOpen) {
-                        answer.style.maxHeight = '0px';
-                        answer.style.opacity = '0';
-                    } else {
-                        answer.style.maxHeight = '500px';
-                        answer.style.opacity = '1';
+                }
+            });
+        },
+
+        initTarifasModal() {
+            const images = document.querySelectorAll('.tarifa img');
+            const modal = document.getElementById('modal');
+            const modalImg = document.getElementById('imgAmpliada');
+            const closeBtn = document.querySelector('.cerrar');
+
+            if (!modal || !modalImg || images.length === 0) return;
+
+            // Open modal
+            images.forEach(img => {
+                img.addEventListener('click', () => {
+                    modal.classList.add('modal-open');
+                    modalImg.src = img.src;
+                    modalImg.alt = img.alt;
+                    document.body.classList.add('modal-open-body');
+                });
+            });
+
+            // Close modal function
+            const closeModal = () => {
+                modal.classList.remove('modal-open');
+                document.body.classList.remove('modal-open-body');
+            };
+
+            // Close events
+            if (closeBtn) closeBtn.addEventListener('click', closeModal);
+            window.addEventListener('click', (e) => e.target === modal && closeModal());
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('modal-open')) {
+                    closeModal();
+                }
+            });
+        },
+
+        initMobileMenu() {
+            const menuToggle = document.getElementById('menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+
+            if (menuToggle && mainNav) {
+                menuToggle.addEventListener('click', () => {
+                    mainNav.classList.toggle('menu-abierto');
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!menuToggle.contains(e.target) && !mainNav.contains(e.target)) {
+                        mainNav.classList.remove('menu-abierto');
                     }
                 });
             }
-        });
-    }
+        },
+
+        init() {
+            this.initServiceItems();
+            this.initImageHovers();
+            this.initFAQAccordion();
+            this.initTarifasModal();
+            this.initMobileMenu();
+        }
+    },
 
     // ===================================
-    // SMOOTH SCROLLING
+    // FORMS MODULE
     // ===================================
     
-    /**
-     * Initialize smooth scrolling for anchor links
-     */
-    function initSmoothScrolling() {
-        const anchorLinks = document.querySelectorAll('a[href^="#"]');
-        
-        anchorLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                const targetId = link.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
+    forms: {
+        initContactForm() {
+            const contactForm = document.querySelector('#contact-form form');
+            
+            if (!contactForm) return;
+            
+            contactForm.addEventListener('submit', (e) => {
+                const formData = this.getFormData(contactForm);
+                const errors = this.validateContactForm(formData);
                 
-                if (targetElement) {
+                if (errors.length > 0) {
                     e.preventDefault();
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    CrusertelApp.ui.showAlert(errors.join(', '), 'error');
+                    return false;
                 }
-            });
-        });
-    }
-
-    // ===================================
-    // FORM ENHANCEMENTS
-    // ===================================
-    
-    /**
-     * Add focus/blur effects to form inputs
-     */
-    function initFormEnhancements() {
-        const formInputs = document.querySelectorAll('input, textarea');
-        
-        formInputs.forEach(input => {
-            input.addEventListener('focus', () => {
-                input.parentElement.classList.add('focused');
             });
             
-            input.addEventListener('blur', () => {
-                if (!input.value) {
-                    input.parentElement.classList.remove('focused');
-                }
-            });
-        });
-    }
+            this.showFormMessages();
+        },
 
-    // ===================================
-    // BACK TO TOP BUTTON
-    // ===================================
-    
-    /**
-     * Initialize back to top button
-     */
-    function initBackToTop() {
-        // Create back to top button
-        const backToTopBtn = document.createElement('button');
-        backToTopBtn.innerHTML = '↑';
-        backToTopBtn.className = 'back-to-top';
-        backToTopBtn.setAttribute('aria-label', 'Volver arriba');
-        
-        // Style the button
-        Object.assign(backToTopBtn.style, {
-            position: 'fixed',
-            bottom: '20px',
-            right: '20px',
-            backgroundColor: '#dc3545',
-            color: 'white',
-            border: 'none',
-            borderRadius: '50%',
-            width: '50px',
-            height: '50px',
-            fontSize: '20px',
-            cursor: 'pointer',
-            display: 'none',
-            zIndex: '1000',
-            transition: 'all 0.3s ease'
-        });
+        getFormData(form) {
+            return {
+                nombre: form.querySelector('#nombre')?.value.trim() || '',
+                email: form.querySelector('#email')?.value.trim() || '',
+                telefono: form.querySelector('#telefono')?.value.trim() || '',
+                asunto: form.querySelector('#asunto')?.value.trim() || '',
+                mensaje: form.querySelector('#mensaje')?.value.trim() || ''
+            };
+        },
 
-        document.body.appendChild(backToTopBtn);
+        validateContactForm({ nombre, email, telefono, asunto, mensaje }) {
+            const errors = [];
+            
+            if (!nombre) errors.push('El nombre es obligatorio');
+            if (!email || !this.isValidEmail(email)) errors.push('Email inválido');
+            if (!telefono) errors.push('El teléfono es obligatorio');
+            if (!asunto) errors.push('El asunto es obligatorio');
+            if (!mensaje) errors.push('El mensaje es obligatorio');
+            
+            return errors;
+        },
 
-        // Show/hide button based on scroll position
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                backToTopBtn.style.display = 'block';
-            } else {
-                backToTopBtn.style.display = 'none';
+        isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        },
+
+        showFormMessages() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const success = urlParams.get('success');
+            const error = urlParams.get('error');
+            
+            if (success === '1') {
+                CrusertelApp.ui.showAlert('Mensaje enviado correctamente. Te contactaremos pronto.', 'success');
+            } else if (error) {
+                const errorMessages = {
+                    'save_failed': 'Error al guardar el mensaje. Por favor, inténtalo de nuevo.',
+                    'invalid_method': 'Método inválido'
+                };
+                const message = errorMessages[error] || decodeURIComponent(error);
+                CrusertelApp.ui.showAlert(message, 'error');
             }
-        });
+        },
 
-        // Scroll to top when clicked
-        backToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        initFormEnhancements() {
+            const formInputs = document.querySelectorAll('input, textarea');
+            
+            formInputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    input.parentElement?.classList.add('form-input-focused');
+                });
+                
+                input.addEventListener('blur', () => {
+                    if (!input.value) {
+                        input.parentElement?.classList.remove('form-input-focused');
+                    }
+                });
             });
-        });
+        },
 
-        // Hover effects
-        backToTopBtn.addEventListener('mouseenter', () => {
-            backToTopBtn.style.backgroundColor = '#b1001d';
-            backToTopBtn.style.transform = 'scale(1.1)';
-        });
-
-        backToTopBtn.addEventListener('mouseleave', () => {
-            backToTopBtn.style.backgroundColor = '#dc3545';
-            backToTopBtn.style.transform = 'scale(1)';
-        });
-    }
-
-    // ===================================
-    // LOADING INDICATOR
-    // ===================================
-    
-    /**
-     * Hide loading indicator when page is ready
-     */
-    function hideLoadingIndicator() {
-        const loader = document.querySelector('.loading-indicator');
-        if (loader) {
-            loader.style.opacity = '0';
-            setTimeout(() => {
-                loader.style.display = 'none';
-            }, 300);
+        init() {
+            this.initContactForm();
+            this.initFormEnhancements();
         }
-    }
+    },
 
     // ===================================
-    // INITIALIZE ALL FUNCTIONS
+    // NAVIGATION MODULE
     // ===================================
     
-    // Initialize all functionality
-    initAnimations();
-    initHeaderScroll();
-    initServiceItemsEffects();
-    initImageHoverEffects();
-    initMobileMenu();
-    initTarifasModal();
-    initContactForm();
-    initFAQAccordion();
-    initSmoothScrolling();
-    initFormEnhancements();
-    initBackToTop();
-    hideLoadingIndicator();
+    navigation: {
+        initSmoothScrolling() {
+            const anchorLinks = document.querySelectorAll('a[href^="#"]');
+            
+            anchorLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        e.preventDefault();
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        },
+
+        initBackToTop() {
+            const backToTopBtn = this.createBackToTopButton();
+            document.body.appendChild(backToTopBtn);
+
+            const scrollHandler = CrusertelApp.utils.debounce(() => {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.add('back-to-top-visible');
+                } else {
+                    backToTopBtn.classList.remove('back-to-top-visible');
+                }
+            }, 100);
+
+            window.addEventListener('scroll', scrollHandler, { passive: true });
+
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        },
+
+        createBackToTopButton() {
+            const button = document.createElement('button');
+            button.innerHTML = '↑';
+            button.className = 'back-to-top';
+            button.setAttribute('aria-label', 'Volver arriba');
+            return button;
+        },
+
+        init() {
+            this.initSmoothScrolling();
+            this.initBackToTop();
+        }
+    },
 
     // ===================================
-    // PAGE-SPECIFIC FUNCTIONALITY
+    // UI MODULE
     // ===================================
     
-    // Get current page from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const currentPage = urlParams.get('page') || 'home';
+    ui: {
+        showAlert(message, type = 'info') {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            
+            document.body.appendChild(alertDiv);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                alertDiv.classList.add('alert-fade-out');
+                setTimeout(() => alertDiv.remove(), 300);
+            }, 5000);
+        },
 
-    // Initialize page-specific functionality
-    switch(currentPage) {
-        case 'tarifas':
-            // Additional tarifas-specific code if needed
-            console.log('Tarifas page loaded');
-            break;
-        case 'contact':
-            // Additional contact-specific code if needed
-            console.log('Contact page loaded');
-            break;
-        case 'faq':
-            // FAQ page already has accordion functionality
-            console.log('FAQ page loaded');
-            break;
-        case 'services':
-            // Additional services-specific code if needed
-            console.log('Services page loaded');
-            break;
-        case 'unete':
-            // Additional unete-specific code if needed
-            console.log('Unete page loaded');
-            break;
-        default:
-            // Home page
-            console.log('Home page loaded');
-            break;
+        hideLoadingIndicator() {
+            const loader = document.querySelector('.loading-indicator');
+            if (loader) {
+                loader.classList.add('loading-hidden');
+            }
+        },
+
+        init() {
+            this.hideLoadingIndicator();
+        }
+    },
+
+    // ===================================
+    // UTILITIES
+    // ===================================
+    
+    utils: {
+        debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func.apply(this, args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        },
+
+        isInViewport(element) {
+            const rect = element.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        },
+
+        formatPhoneNumber(phoneNumber) {
+            const cleaned = phoneNumber.replace(/\D/g, '');
+            const match = cleaned.match(/^(\d{3})(\d{2})(\d{2})(\d{2})$/);
+            return match ? `${match[1]} ${match[2]} ${match[3]} ${match[4]}` : phoneNumber;
+        }
+    },
+
+    // ===================================
+    // CLEANUP
+    // ===================================
+    
+    cleanup() {
+        // Clear all active intervals
+        this.state.activeIntervals.forEach(interval => clearInterval(interval));
+        this.state.activeIntervals.clear();
     }
+};
+
+// ===================================
+// INITIALIZE APPLICATION
+// ===================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    CrusertelApp.init();
 });
 
-// ===================================
-// UTILITY FUNCTIONS
-// ===================================
+// Cleanup on page unload
+window.addEventListener('beforeunload', () => {
+    CrusertelApp.cleanup();
+});
 
-/**
- * Debounce function to limit function calls
- */
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-/**
- * Check if element is in viewport
- */
-function isInViewport(element) {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-    );
-}
-
-/**
- * Format phone number
- */
-function formatPhoneNumber(phoneNumber) {
-    const cleaned = phoneNumber.replace(/\D/g, '');
-    const match = cleaned.match(/^(\d{3})(\d{2})(\d{2})(\d{2})$/);
-    if (match) {
-        return `${match[1]} ${match[2]} ${match[3]} ${match[4]}`;
-    }
-    return phoneNumber;
+// Export for potential external use
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = CrusertelApp;
 }

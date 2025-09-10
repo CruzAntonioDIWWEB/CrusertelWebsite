@@ -1,0 +1,289 @@
+/* ================================== */
+/* CRUSERTEL - JAVASCRIPT COMPONENTS SCSS */
+/* ================================== */
+
+// Import global variables and mixins
+@import 'variables/color';
+@import 'variables/variables';
+@import 'variables/animations';
+@import 'variables/layout';
+@import 'variables/forms';
+@import 'variables/typography';
+
+// Example variable usage 
+$brand-main: $primary-red !default; 
+$brand-dark: $primary-dark !default;
+
+// ===================================
+// IMAGE HOVER EFFECTS
+// ===================================
+.js-hover-enabled {
+    transition: transform 0.4s ease;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+// ===================================
+// FAQ ACCORDION
+// ===================================
+.faq-question-clickable {
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: $brand-main;
+    }
+    &:focus {
+        outline: 2px solid $brand-main;
+        outline-offset: 2px;
+    }
+}
+
+.faq-respuesta {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+}
+
+.faq-answer-open {
+    max-height: 500px !important;
+    opacity: 1 !important;
+}
+
+// ===================================
+// MODAL ENHANCEMENTS
+// ===================================
+.modal-open {
+    display: block !important;
+}
+
+.modal-open-body {
+    overflow: hidden;
+}
+
+// ===================================
+// BACK TO TOP BUTTON
+// ===================================
+.back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: $brand-main;
+    color: $color-white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+
+    &.back-to-top-visible {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    &:hover {
+        background-color: $brand-dark;
+        transform: translateY(0) scale(1.1);
+    }
+
+    &:active {
+        transform: translateY(0) scale(0.95);
+    }
+
+    &:focus {
+        outline: 2px solid $brand-main;
+        outline-offset: 2px;
+    }
+}
+
+// ===================================
+// ALERT SYSTEM
+// ===================================
+.alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: $border-radius-lg;
+    z-index: 1001;
+    max-width: 400px;
+    box-shadow: 0 4px 12px rgba($color-black, 0.15);
+    font-weight: $font-weight-medium;
+    line-height: 1.4;
+    animation: alertSlideIn 0.3s ease-out;
+
+    &.alert-success {
+        background-color: $color-success-bg;
+        color: $color-success-text;
+        border: 1px solid $color-success-border;
+    }
+    &.alert-error {
+        background-color: $color-danger-bg;
+        color: $color-danger-text;
+        border: 1px solid $color-danger-border;
+    }
+    &.alert-warning {
+        background-color: $color-warning-bg;
+        color: $color-warning-text;
+        border: 1px solid $color-warning-border;
+    }
+    &.alert-info {
+        background-color: $color-info-bg;
+        color: $color-info-text;
+        border: 1px solid $color-info-border;
+    }
+    &:focus {
+        outline: 2px solid $brand-main;
+        outline-offset: 2px;
+    }
+    &.alert-fade-out {
+        animation: alertSlideOut 0.3s ease-in forwards;
+    }
+}
+
+@keyframes alertSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes alertSlideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+}
+
+// ===================================
+// FORM ENHANCEMENTS
+// ===================================
+.form-input-focused {
+    .form-group & label {
+        color: $brand-main;
+        font-weight: $font-weight-semibold;
+    }
+
+    .form-group & input,
+    .form-group & textarea {
+        border-color: $brand-main;
+        box-shadow: 0 0 0 2px rgba($brand-main, 0.1);
+    }
+}
+
+// ===================================
+// LOADING INDICATOR
+// ===================================
+.loading-indicator {
+    transition: opacity 0.3s ease;
+}
+
+.loading-hidden {
+    opacity: 0;
+    pointer-events: none;
+
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: transparent;
+        z-index: -1;
+    }
+}
+
+// ===================================
+// PULSING EFFECT FOR SERVICE ITEMS
+// ===================================
+.service-item {
+    &.pulsing {
+        animation: pulse 0.8s ease-in-out infinite alternate;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 4px 8px rgba($color-black, 0.1);
+    }
+    100% {
+        transform: scale(1.02);
+        box-shadow: 0 8px 16px rgba($color-black, 0.15);
+    }
+}
+
+// ===================================
+// ACCESSIBILITY IMPROVEMENTS
+// ===================================
+.faq-question-clickable:focus,
+.alert:focus {
+    outline: 2px solid $brand-main;
+    outline-offset: 2px;
+}
+
+// Reduced motion preferences
+@media (prefers-reduced-motion: reduce) {
+    .js-hover-enabled,
+    .back-to-top,
+    .alert,
+    .faq-respuesta,
+    .service-item.pulsing {
+        animation: none;
+        transition: none;
+    }
+
+    .js-hover-enabled:hover {
+        transform: none;
+    }
+
+    .back-to-top:hover {
+        transform: none;
+    }
+}
+
+// ===================================
+// RESPONSIVE DESIGN
+// ===================================
+@media (max-width: $breakpoint-md) {
+    .alert {
+        right: 10px;
+        left: 10px;
+        max-width: calc(100vw - 20px);
+    }
+
+    .back-to-top {
+        bottom: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: $breakpoint-sm) {
+    .alert {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+}
