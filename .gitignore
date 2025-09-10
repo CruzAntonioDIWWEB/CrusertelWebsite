@@ -1,0 +1,23 @@
+# Composer dependencies
+/vendor/
+
+# Node dependencies 
+/node_modules/
+
+# Build artifacts
+/assets/styles/main.css.map
+
+# Environment and sensitive files
+.env
+.env.local
+.env.*
+
+# PHPUnit cache
+.phpunit.result.cache
+
+# SASS/SCSS cache
+.sass-cache/
+.cache/
+
+# Misc
+composer.lock
