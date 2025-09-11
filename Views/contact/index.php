@@ -1,7 +1,7 @@
 <section id="contact-form">
     <div class="container">
         <!-- Remove action attribute, let MVC handle it -->
-        <form method="POST" class="contact-form">
+        <form method="POST" action="index.php?page=contact" class="contact-form">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" id="nombre" name="nombre" required>

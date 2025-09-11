@@ -1,0 +1,87 @@
+[10-Sep-2025 13:30:08 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "BaseController\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54
+[10-Sep-2025 13:30:10 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "BaseController\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54
+[10-Sep-2025 13:30:14 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "BaseController\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54
+[10-Sep-2025 13:30:15 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "BaseController\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54
+[10-Sep-2025 13:30:15 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "BaseController\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54
+[10-Sep-2025 13:30:15 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "BaseController\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54
+[10-Sep-2025 13:30:47 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "BaseController\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54
+[10-Sep-2025 13:31:30 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "Controllers\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54
+[10-Sep-2025 13:31:31 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "Controllers\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54
+[10-Sep-2025 13:31:31 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "Controllers\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54
+[10-Sep-2025 13:31:31 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "Controllers\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54
+[10-Sep-2025 13:31:32 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "Controllers\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54
+[10-Sep-2025 13:31:35 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "Controllers\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54
+[10-Sep-2025 13:31:59 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "Controllers\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54
+[10-Sep-2025 13:32:39 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "BaseController\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Controllers\ContactController.php:11
+Stack trace:
+#0 C:\xampp\htdocs\dashboard\CrusertelWebsite\vendor\composer\ClassLoader.php(576): include()
+#1 C:\xampp\htdocs\dashboard\CrusertelWebsite\vendor\composer\ClassLoader.php(427): Composer\Autoload\{closure}('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php(23): Composer\Autoload\ClassLoader->loadClass('Controllers\\Con...')
+#3 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Controllers\ContactController.php on line 11
+[10-Sep-2025 13:34:36 Europe/Madrid] Contact form POST request received
+[10-Sep-2025 13:34:36 Europe/Madrid] === CONTACT FORM SUBMISSION ===
+[10-Sep-2025 13:34:36 Europe/Madrid] Raw POST data: Array
+(
+    [nombre] => Testing
+    [email] => testing@gmail.com
+    [telefono] => 653880006
+    [asunto] => Prueba 1
+    [mensaje] => This is the test number 1 of the new contact form sistem. I really hope this works or else I am writing this without purpose.
+)
+
+[10-Sep-2025 13:34:36 Europe/Madrid] Processed data:
+[10-Sep-2025 13:34:36 Europe/Madrid] - Name: 'Testing' (7 chars)
+[10-Sep-2025 13:34:36 Europe/Madrid] - Email: 'testing@gmail.com' (17 chars)
+[10-Sep-2025 13:34:36 Europe/Madrid] - Phone: '653880006' (9 chars)
+[10-Sep-2025 13:34:36 Europe/Madrid] - Subject: 'Prueba 1' (8 chars)
+[10-Sep-2025 13:34:36 Europe/Madrid] - Message: PROVIDED (125 chars)
+[10-Sep-2025 13:34:36 Europe/Madrid] - User IP: ::1
+[10-Sep-2025 13:34:36 Europe/Madrid] - User Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36
+[10-Sep-2025 13:34:36 Europe/Madrid] Contact form validation passed - proceeding to save
+[10-Sep-2025 13:34:37 Europe/Madrid] PHP Warning:  mysqli::__construct(): php_network_getaddresses: getaddrinfo for db5018579352.hosting-data.io failed: Host desconocido.  in C:\xampp\htdocs\dashboard\CrusertelWebsite\config\config.php on line 22
+[10-Sep-2025 13:34:37 Europe/Madrid] Database connection error: php_network_getaddresses: getaddrinfo for db5018579352.hosting-data.io failed: Host desconocido. 
+[10-Sep-2025 13:34:37 Europe/Madrid] Database connection failed in Contact::save()
+[10-Sep-2025 13:34:37 Europe/Madrid] CRITICAL: Failed to save contact form to database
