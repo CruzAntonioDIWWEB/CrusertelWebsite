@@ -86,6 +86,41 @@ define('SITE_NAME', 'Crusertel');
 define('SITE_EMAIL', 'info@crusertel.es');
 define('SITE_PHONE', '958 01 64 11');
 define('SITE_ADDRESS', 'Calle Arabial 45 local 18');
-define('BASE_URL', '/dashboard/CrusertelWebsite/');
+
+// IONOS Production paths
+define('BASE_URL', '/');
 define('ASSETS_URL', BASE_URL . 'assets/');
+define('IMG_URL', ASSETS_URL . 'img/');
+
+// Image category paths
+define('IMG_BACKGROUND_URL', IMG_URL . 'background/');
+define('IMG_PEOPLE_URL', IMG_URL . 'people/');
+define('IMG_TARIFAS_URL', IMG_URL . 'tarifas/');
+define('IMG_LOGO_URL', IMG_URL . 'logo/');
+
+/**
+ * Helper functions for image URLs
+ */
+function getImageUrl($filename, $subfolder = '') {
+    if (!empty($subfolder)) {
+        return IMG_URL . $subfolder . '/' . $filename;
+    }
+    return IMG_URL . $filename;
+}
+
+function getBackgroundImageUrl($filename) {
+    return IMG_BACKGROUND_URL . $filename;
+}
+
+function getPeopleImageUrl($filename) {
+    return IMG_PEOPLE_URL . $filename;
+}
+
+function getTarifaImageUrl($filename) {
+    return IMG_TARIFAS_URL . $filename;
+}
+
+function getLogoImageUrl($filename) {
+    return IMG_LOGO_URL . $filename;
+}
 ?>
