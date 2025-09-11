@@ -7,6 +7,10 @@
 # Build artifacts
 /assets/styles/main.css.map
 
+# Logs
+/logs/
+php_errors.log
+
 # Environment and sensitive files
 .env
 .env.local

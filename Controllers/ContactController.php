@@ -1,10 +1,6 @@
 <?php
 namespace Controllers;
 
-use Controllers\BaseController;
-use Models\Contact;
-use Services\EmailService;
-
 class ContactController extends BaseController {
     
     public function showContactForm() {
@@ -64,20 +60,28 @@ class ContactController extends BaseController {
         ];
         
         // Save to database first
-        $contact = new Contact();
-        $databaseSaved = $contact->save($name, $email, $phone, $subject, $message);
-        
-        if (!$databaseSaved) {
-            error_log("CRITICAL: Failed to save contact form to database");
+        try {
+            $contact = new \Models\Contact(); // Fix: Use full namespace
+            $databaseSaved = $contact->save($name, $email, $phone, $subject, $message);
+            
+            if (!$databaseSaved) {
+                error_log("CRITICAL: Failed to save contact form to database");
+                $this->redirect('index.php?page=contact&error=save_failed');
+                return;
+            }
+            
+            error_log("Contact form saved to database successfully");
+            
+        } catch (Exception $e) {
+            error_log("CRITICAL: Database exception: " . $e->getMessage());
+            error_log("Stack trace: " . $e->getTraceAsString());
             $this->redirect('index.php?page=contact&error=save_failed');
             return;
         }
         
-        error_log("Contact form saved to database successfully");
-        
         // Initialize email service
         try {
-            $emailService = new EmailService();
+            $emailService = new \Services\EmailService(); // Fix: Use full namespace
             
             // Send main contact email
             $emailSent = $emailService->sendContactFormEmail($contactData);
