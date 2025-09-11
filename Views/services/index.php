@@ -6,7 +6,7 @@
 </section>
 
 <section class="vodafone-divider">
-    <img src="/assets/img/background/imagen_bievenidovodafone.png" alt="Bienvenido a un nuevo Vodafone">
+    <img src="<?php echo getBackgroundImageUrl('imagen_bievenidovodafone.png'); ?>" alt="Bienvenido a un nuevo Vodafone">
 </section>
 
 <section id="paquete-convergente">

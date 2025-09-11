@@ -35,23 +35,23 @@ try {
             break;
             
         case 'services':
-            $controller = new \BaseController\BaseController();
+            $controller = new \Controllers\BaseController();
             $controller->loadView('services/index', ['title' => 'Servicios - Crusertel']);
             break;
             
         case 'tarifs':
-            $controller = new \BaseController\BaseController();
+            $controller = new \Controllers\BaseController();
             $controller->loadView('tarifs/index', ['title' => 'Tarifas - Crusertel']);
             break;
             
         case 'joinUs':
-            $controller = new \BaseController\BaseController();
+            $controller = new \Controllers\BaseController();
             $controller->loadView('joinUs/index', ['title' => 'Únete - Crusertel']);
             break;
             
         case 'home':
         default:
-            $controller = new \BaseController\BaseController();
+            $controller = new \Controllers\BaseController();
             $controller->loadView('home/index', ['title' => 'Inicio - Crusertel']);
             break;
     }
@@ -66,7 +66,7 @@ try {
     http_response_code(500);
     
     try {
-        $controller = new \BaseController\BaseController();
+        $controller = new \Controllers\BaseController();
         $errorMessage = ($_ENV['APP_DEBUG'] === 'true') 
             ? 'Error: ' . $e->getMessage() . ' in ' . basename($e->getFile()) . ' line ' . $e->getLine()
             : 'Ha ocurrido un error interno. Por favor, inténtalo más tarde.';

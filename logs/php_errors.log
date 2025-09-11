@@ -85,3 +85,11 @@ Stack trace:
 [10-Sep-2025 13:34:37 Europe/Madrid] Database connection error: php_network_getaddresses: getaddrinfo for db5018579352.hosting-data.io failed: Host desconocido. 
 [10-Sep-2025 13:34:37 Europe/Madrid] Database connection failed in Contact::save()
 [10-Sep-2025 13:34:37 Europe/Madrid] CRITICAL: Failed to save contact form to database
+[11-Sep-2025 11:52:50 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "BaseController\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54
+[11-Sep-2025 11:52:59 Europe/Madrid] PHP Fatal error:  Uncaught Error: Class "BaseController\BaseController" not found in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php:54
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboard\CrusertelWebsite\Public\index.php on line 54

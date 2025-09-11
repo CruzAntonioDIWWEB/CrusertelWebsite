@@ -1,7 +1,7 @@
 <header class="fade-in-down-initial">
     <div class="container header-content">
         <div class="logo">
-            <a href="index.php?page=home"><img src="/assets/img/logo/imagen_logo_crusertel.jpg" alt="Logo Crusertel"></a>
+            <a href="index.php?page=home"><img src="<?php echo getLogoImageUrl('imagen_logo_crusertel.jpg'); ?>" alt="Logo Crusertel"></a>
         </div>
         <nav>
             <ul>
