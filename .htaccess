@@ -1,0 +1,44 @@
+# .htaccess for /Crusertel folder
+
+RewriteEngine On
+
+# Force HTTPS (recommended for production)
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Direct all requests to the Public folder
+RewriteCond %{REQUEST_URI} !^/Public/
+RewriteRule ^(.*)$ /Public/$1 [L]
+
+# Security: Prevent access to sensitive files and folders
+<Files ".env">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "composer.json">
+    Order allow,deny
+    Deny from all
+</Files>
+
+<Files "composer.lock">
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Block access to Controllers, Models, Views folders from web
+RewriteRule ^(Controllers|Models|Views|config|logs|vendor)/ - [F,L]
+
+# Prevent directory browsing
+Options -Indexes
+
+# Cache control for static assets
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+</IfModule>

@@ -87,40 +87,40 @@ define('SITE_EMAIL', 'info@crusertel.es');
 define('SITE_PHONE', '958 01 64 11');
 define('SITE_ADDRESS', 'Calle Arabial 45 local 18');
 
-// IONOS Production paths
+// IONOS Production paths (CORRECTED)
 define('BASE_URL', '/');
-define('ASSETS_URL', BASE_URL . 'assets/');
-define('IMG_URL', ASSETS_URL . 'img/');
+define('ASSETS_URL', '/assets/');  // Changed from BASE_URL . 'assets/'
+define('IMG_URL', '/assets/img/'); // Changed from ASSETS_URL . 'img/'
 
 // Image category paths
-define('IMG_BACKGROUND_URL', IMG_URL . 'background/');
-define('IMG_PEOPLE_URL', IMG_URL . 'people/');
-define('IMG_TARIFAS_URL', IMG_URL . 'tarifas/');
-define('IMG_LOGO_URL', IMG_URL . 'logo/');
+define('IMG_BACKGROUND_URL', '/assets/img/background/');
+define('IMG_PEOPLE_URL', '/assets/img/people/');
+define('IMG_TARIFAS_URL', '/assets/img/tarifas/');
+define('IMG_LOGO_URL', '/assets/img/logo/');
 
 /**
- * Helper functions for image URLs
+ * Helper functions for image URLs - CORRECTED for IONOS
  */
 function getImageUrl($filename, $subfolder = '') {
     if (!empty($subfolder)) {
-        return IMG_URL . $subfolder . '/' . $filename;
+        return '/assets/img/' . $subfolder . '/' . $filename;
     }
-    return IMG_URL . $filename;
+    return '/assets/img/' . $filename;
 }
 
 function getBackgroundImageUrl($filename) {
-    return IMG_BACKGROUND_URL . $filename;
+    return '/assets/img/background/' . $filename;
 }
 
 function getPeopleImageUrl($filename) {
-    return IMG_PEOPLE_URL . $filename;
+    return '/assets/img/people/' . $filename;
 }
 
 function getTarifaImageUrl($filename) {
-    return IMG_TARIFAS_URL . $filename;
+    return '/assets/img/tarifas/' . $filename;
 }
 
 function getLogoImageUrl($filename) {
-    return IMG_LOGO_URL . $filename;
+    return '/assets/img/logo/' . $filename;
 }
 ?>
